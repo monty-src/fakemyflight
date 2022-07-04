@@ -1,13 +1,11 @@
+import React, { useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-
-import "react-datepicker/dist/react-datepicker.css";
+import Form from './components/Form';
+import Navbar from './components/Navbar';
 
 export default function Home() {
-  const [startDate, setStartDate] = useState(new Date());
 
   return (
     <div>
@@ -17,15 +15,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
 
       </Head>
-      <header className="container mb-10 lg px-4 h-12 bg-gray-100 border-2 border-slate-600 border-solid border-spacing-1">
-        <p>Navbar</p>
-      </header>
+      <Navbar />
       <main className="container lg">
 
         <section className="bg-gray-100">
           <div className="max-w-screen-xl py-16 mx-auto sm:px-6 lg:px-8">
-            <div className="grid
-            ls-1 gap-x-16 gap-y-8 lg:grid-cols-5">
+            <div className="grid ls-1 gap-x-16 gap-y-8 lg:grid-cols-5">
               <div className="lg:py-12 lg:col-span-2">
                 <p className="max-w-xl text-lg">
                   At the same time, the fact that we are wholly owned and totally independent from manufacturer and other group
@@ -39,71 +34,7 @@ export default function Home() {
               </div>
 
               <div className="p-8 bg-white rounded-lg shadow-lg lg:p-12 lg:col-span-3">
-                <form action="" className="space-y-4">
-
-                  <div className="flex">
-                  <div className="form-check">
-                    <input className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                    <label className="form-check-label inline-block text-gray-800" htmlFor="flexRadioDefault1">
-                      One way
-                    </label>
-                  </div>
-                  <div className="form-check">
-                    <input className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
-                    <label className="form-check-label inline-block text-gray-800" htmlFor="flexRadioDefault2">
-                      Round Trip
-                    </label>
-                  </div>
-
-                  </div>
-
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <div>
-                      <label className="sr-only" htmlFor="name">From</label>
-                      <input className="w-full p-3 text-sm border-gray-200 rounded-lg" placeholder="From" type="text" id="fromAirport" />
-                    </div>
-                    <div>
-                      <label className="sr-only" htmlFor="name">To</label>
-                      <input className="w-full p-3 text-sm border-gray-200 rounded-lg" placeholder="To" type="text" id="toAirport" />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <div>
-                    <label className="sr-only" htmlFor="name">When</label>
-                    <DatePicker 
-                      className="w-full p-3 text-sm border-gray-200 rounded-lg"
-                      selected={startDate} 
-                      onChange={(date) => setStartDate(date)} />
-                    </div>
-
-                    <div>
-                    <label className="sr-only" htmlFor="name">Return</label>
-                    <DatePicker 
-                      className="w-full p-3 text-sm border-gray-200 rounded-lg"
-                      selected={startDate} 
-                      onChange={(date) => setStartDate(date)} />
-                    </div>
-                  </div>
-
-                  <div className="mt-4">
-                    <button
-                      type="submit"
-                      className="inline-flex items-center justify-center w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto">
-                      <span className="font-medium"> Go</span>
-
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-5 h-5 ml-3"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    </button>
-                  </div>
-                </form>
+                <Form />
               </div>
             </div>
           </div>
