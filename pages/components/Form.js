@@ -1,5 +1,5 @@
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import classNames from 'classnames';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -10,16 +10,29 @@ import AutoComplete from './AutoComplete';
 const Form = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [radio, setRadio] = useState(0);
+    const [fromOptions, setFromOptions] = useState({});
 
     const whenInput = (radio === 0) ? classNames('hidden') : classNames('opacity-100');
     const datePickerGrid = (radio === 0) ? classNames('sm:grid-cols-1') : classNames('sm:grid-cols-2');
 
-    const options = [
-        { value: 'javascript', label: 'Javascript' },
-        { value: 'chakra', label: 'Chakra' },
-        { value: 'react', label: 'React' },
-        { value: 'css', label: 'CSS' },
-      ];
+    useEffect(() => {
+
+        // const options = {
+        //     method: 'GET',
+        //     url: 'https://aerodatabox.p.rapidapi.com/airports/iata/LAX',
+        //     headers: {
+        //       'X-RapidAPI-Key': process.env.API_KEY,
+        //       'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com'
+        //     }
+        //   };
+          
+        //   axios.request(options).then(function (response) {
+        //       console.log(response.data);
+        //   }).catch(function (error) {
+        //       console.error(error);
+        //   });
+    })
+
     
     return (
         <div className="space-y-4">

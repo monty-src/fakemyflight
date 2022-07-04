@@ -31,9 +31,7 @@ const AutoComplete = () => {
         setValue(e.target.textContent.trim());
         setIsMenuOpen(false);
     };
-
-    const count = 0;
-
+    
     const keyDown = e => {
       const childrenLength = isMenuOpen && parseInt(listRef.current.childNodes.length) - 1;
       switch(e.key) {
