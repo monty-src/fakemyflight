@@ -22,7 +22,7 @@ const Form = () => {
       ];
     
     return (
-        <form action="" className="space-y-4">
+        <div className="space-y-4">
             <div className="flex">
                 <div className="form-check mr-10">
                     <input checked={radio === 0} onChange={() => setRadio(0)} className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
@@ -36,13 +36,10 @@ const Form = () => {
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <AutoComplete />
-                <div>
-                    <label className="sr-only" htmlFor="name">To</label>
-                    <input className="w-full p-3 text-sm border-gray-200 rounded-lg" placeholder="To" type="text" id="toAirport" />
-                </div>
+                <AutoComplete />
             </div>
 
-            {/* <div className={`grid grid-cols-1 gap-4 ${datePickerGrid}`}>
+            <div className={`grid grid-cols-1 gap-4 ${datePickerGrid}`}>
                 <div>
                     <label className="sr-only" htmlFor="name">When</label>
                     <DatePicker 
@@ -58,9 +55,9 @@ const Form = () => {
                         onChange={(date) => setStartDate(date)} 
                         className={`w-full p-3 text-sm border-gray-200 rounded-lg`}/>
                 </div>
-            </div> */}
+            </div>
 
-            {/* <div className="mt-4">
+            <div className="mt-4">
                 <button
                     type="submit"
                     className="inline-flex items-center justify-center w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto">
@@ -75,8 +72,8 @@ const Form = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                         </svg>
                 </button>
-            </div> */}
-      </form>
+            </div>
+      </div>
     )
 }
 

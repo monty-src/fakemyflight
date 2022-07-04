@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect, Children } from 'react';
-import classNames from 'classnames';
 
 const AutoComplete = () => {
     const ref = useRef();
@@ -7,17 +6,16 @@ const AutoComplete = () => {
     const [value, setValue] = useState('');
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [select, setSelect] = useState(-1);
-
-    const options = [
-        'Acerola',
-        'Apple',
-        'Apricots',
-        'Avocado',
-        'Banana',
-        'Blackberries',
-        'Blackcurrant',
-        'Blueberries'
-    ];
+    const [options, setOptions] = useState([
+      'Acerola',
+      'Apple',
+      'Apricots',
+      'Avocado',
+      'Banana',
+      'Blackberries',
+      'Blackcurrant',
+      'Blueberries'
+  ]);
 
     const onChange = e => {
         if (e.target.value === '') {
@@ -30,7 +28,6 @@ const AutoComplete = () => {
     };
 
     const onClick = e => {
-        console.log('current target: ', e.target.textContent.trim());
         setValue(e.target.textContent.trim());
         setIsMenuOpen(false);
     };
@@ -38,10 +35,10 @@ const AutoComplete = () => {
     const count = 0;
 
     const keyDown = e => {
+      const childrenLength = isMenuOpen && parseInt(listRef.current.childNodes.length) - 1;
       switch(e.key) {
         case 'ArrowDown':
           if (isMenuOpen) {
-            const childrenLength = parseInt(listRef.current.childNodes.length) - 1;
             if (childrenLength === parseInt(select)) {
               setSelect(0);
               return false;
@@ -50,7 +47,6 @@ const AutoComplete = () => {
           }
           break;
           case 'ArrowUp':
-            const childrenLength = parseInt(listRef.current.childNodes.length) -1;
             if ( parseInt(select) <= 0) {
               setSelect(childrenLength);
               return false;
@@ -61,7 +57,11 @@ const AutoComplete = () => {
             console.log('enter');
             listRef.current.childNodes[select].click();
             break;
+          case 'Tab' || 'Shift':
+            setIsMenuOpen(false);
+            return;
         default:
+            setSelect(-1);
           return;
       }
     };
