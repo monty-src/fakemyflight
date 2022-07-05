@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, Children } from 'react';
+import axios from 'axios';
 
 const AutoComplete = () => {
     const ref = useRef();
@@ -6,16 +7,7 @@ const AutoComplete = () => {
     const [value, setValue] = useState('');
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [select, setSelect] = useState(-1);
-    const [options, setOptions] = useState([
-      'Acerola',
-      'Apple',
-      'Apricots',
-      'Avocado',
-      'Banana',
-      'Blackberries',
-      'Blackcurrant',
-      'Blueberries'
-  ]);
+    const [options, setOptions] = useState([]);
 
     const onChange = e => {
         if (e.target.value === '') {
@@ -77,6 +69,31 @@ const AutoComplete = () => {
       }
     }, [isMenuOpen]);
 
+    useEffect(() => {
+        if(value) {
+          const configuration = {
+            method: 'GET',
+            url: `api/airports/${value}`,
+            headers: {
+              'X-RapidAPI-Key': process.env.API_KEY,
+              'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com'
+            }
+          };
+          
+          axios.request(configuration).then(function (response) {
+              if (response.data.name !== null) {
+                setOptions([
+                  `${response.data.code} - ${response.data.name}`
+                ]);
+              }
+          }).catch(function (error) {
+              console.error(error);
+          });
+        }
+
+
+    }, [value]);
+
     return (
         <div className="relative" ref={ref}>
           <label className="sr-only" htmlFor="name">From</label>
@@ -96,12 +113,16 @@ const AutoComplete = () => {
                   <div
                     key={idx}
                     onClick={onClick} 
-                    className={`p-2 border-gray-200 cursor-pointer ${(idx === select) ? 'border-blue-500 border-2' : 'border-b-2'}`}>
+                    className={`
+                      p-2
+                      border-gray-200 
+                      hover:border-blue-500 
+                      hover:border-2 
+                      cursor-pointer 
+                      ${(idx === select) ? 'border-blue-500 border-2' : 'border-b-2'}`}>
                     {option}
                   </div>
-                )}
-                
-                
+                )}         
               </div>}
         </div>
     )

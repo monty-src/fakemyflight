@@ -15,24 +15,6 @@ const Form = () => {
     const whenInput = (radio === 0) ? classNames('hidden') : classNames('opacity-100');
     const datePickerGrid = (radio === 0) ? classNames('sm:grid-cols-1') : classNames('sm:grid-cols-2');
 
-    useEffect(() => {
-
-        // const options = {
-        //     method: 'GET',
-        //     url: 'https://aerodatabox.p.rapidapi.com/airports/iata/LAX',
-        //     headers: {
-        //       'X-RapidAPI-Key': process.env.API_KEY,
-        //       'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com'
-        //     }
-        //   };
-          
-        //   axios.request(options).then(function (response) {
-        //       console.log(response.data);
-        //   }).catch(function (error) {
-        //       console.error(error);
-        //   });
-    })
-
     
     return (
         <div className="space-y-4">
