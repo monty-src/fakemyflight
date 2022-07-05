@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, Children } from 'react';
 import axios from 'axios';
 
-const AutoComplete = () => {
+const AutoComplete = ({ label, }) => {
     const ref = useRef();
     const listRef = useRef();
     const [value, setValue] = useState('');
@@ -16,6 +16,7 @@ const AutoComplete = () => {
           return;
         }
         setValue(e.target.value);
+        setOptions([]);
         setIsMenuOpen(true);
     };
 
@@ -46,9 +47,11 @@ const AutoComplete = () => {
           case 'Enter':
             console.log('enter');
             listRef.current.childNodes[select].click();
+            setOptions([]);
             break;
           case 'Tab' || 'Shift':
             setIsMenuOpen(false);
+            setOptions([]);
             return;
         default:
             setSelect(-1);
@@ -85,9 +88,12 @@ const AutoComplete = () => {
                 setOptions([
                   `${response.data.code} - ${response.data.name}`
                 ]);
+                return false;
               }
+              setOptions([ 'No results found' ]);
           }).catch(function (error) {
-              console.error(error);
+            setOptions([ 'No results found' ]);
+            console.error(error);
           });
         }
 
@@ -96,18 +102,17 @@ const AutoComplete = () => {
 
     return (
         <div className="relative" ref={ref}>
-          <label className="sr-only" htmlFor="name">From</label>
+          <label className="sr-only" htmlFor="name">{label}</label>
           <input 
             autoComplete="off"
             onChange={onChange}
             onKeyDown={keyDown}
             value={value}
             type="text"
-            placeholder="From"
+            placeholder={label}
             className="w-full p-3 text-sm border-gray-200 rounded-lg" 
-            id="fromAirport"/>
-            {isMenuOpen &&
-              
+            id={`${label}Airport`}/>
+            {isMenuOpen &&  
               <div className="absolute z-10 bg-white w-full" ref={listRef}>
                 {options.map((option, idx) => 
                   <div
@@ -115,10 +120,11 @@ const AutoComplete = () => {
                     onClick={onClick} 
                     className={`
                       p-2
+                      text-xs
+                      hover:border-2 
+                      cursor-pointer
                       border-gray-200 
                       hover:border-blue-500 
-                      hover:border-2 
-                      cursor-pointer 
                       ${(idx === select) ? 'border-blue-500 border-2' : 'border-b-2'}`}>
                     {option}
                   </div>

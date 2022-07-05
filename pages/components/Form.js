@@ -10,11 +10,9 @@ import AutoComplete from './AutoComplete';
 const Form = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [radio, setRadio] = useState(0);
-    const [fromOptions, setFromOptions] = useState({});
 
     const whenInput = (radio === 0) ? classNames('hidden') : classNames('opacity-100');
     const datePickerGrid = (radio === 0) ? classNames('sm:grid-cols-1') : classNames('sm:grid-cols-2');
-
     
     return (
         <div className="space-y-4">
@@ -30,8 +28,12 @@ const Form = () => {
             </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <AutoComplete />
-                <AutoComplete />
+                <AutoComplete
+                    label="From"
+                 />
+                <AutoComplete 
+                    label="To"
+                />
             </div>
 
             <div className={`grid grid-cols-1 gap-4 ${datePickerGrid}`}>
