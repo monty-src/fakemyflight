@@ -8,12 +8,9 @@ import AutoComplete from './AutoComplete';
 
 
 const Form = () => {
-    const numWeeks = 2;
-    const futureDate = new Date();
-    futureDate.setDate(futureDate.getDate() + numWeeks * 7);
 
     const [fromDate, setFromDate] = useState(new Date());
-    const [toDate, setToDate] = useState(futureDate);
+    const [toDate, setToDate] = useState('');
     const [radio, setRadio] = useState(0);
 
     const whenInput = (radio === 0) ? classNames('hidden') : classNames('opacity-100');
@@ -41,6 +38,7 @@ const Form = () => {
                 <div>
                     <label className="sr-only" htmlFor="name">When</label>
                     <DatePicker 
+                        placeholderText='Leave Date'
                         className="w-full p-3 text-sm border-gray-200 rounded-lg"
                         selected={fromDate} 
                         onChange={(date) => setFromDate(date)} />
@@ -48,7 +46,8 @@ const Form = () => {
 
                 <div className={whenInput}>
                     <label className="sr-only" htmlFor="name">Return</label>
-                    <DatePicker 
+                    <DatePicker
+                        placeholderText='Return Date'
                         className={`w-full p-3 text-sm border-gray-200 rounded-lg`}
                         selected={toDate} 
                         onChange={(date) => setToDate(date)} 
