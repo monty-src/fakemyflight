@@ -8,7 +8,12 @@ import AutoComplete from './AutoComplete';
 
 
 const Form = () => {
-    const [startDate, setStartDate] = useState(new Date());
+    const numWeeks = 2;
+    const futureDate = new Date();
+    futureDate.setDate(futureDate.getDate() + numWeeks * 7);
+
+    const [fromDate, setFromDate] = useState(new Date());
+    const [toDate, setToDate] = useState(futureDate);
     const [radio, setRadio] = useState(0);
 
     const whenInput = (radio === 0) ? classNames('hidden') : classNames('opacity-100');
@@ -21,19 +26,15 @@ const Form = () => {
                     <input checked={radio === 0} onChange={() => setRadio(0)} className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
                     <label className="form-check-label inline-block text-gray-800" htmlFor="flexRadioDefault1"> One way </label>
                 </div>
-            <div className="form-check">
-                <input checked={radio === 1} onChange={() => setRadio(1)} className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
-                <label className="form-check-label inline-block text-gray-800" htmlFor="flexRadioDefault2"> Round Trip </label>
-            </div>
+                <div className="form-check">
+                    <input checked={radio === 1} onChange={() => setRadio(1)} className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
+                    <label className="form-check-label inline-block text-gray-800" htmlFor="flexRadioDefault2"> Round Trip </label>
+                </div>
             </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <AutoComplete
-                    label="From"
-                 />
-                <AutoComplete 
-                    label="To"
-                />
+                <AutoComplete label="From" />
+                <AutoComplete  label="To" />
             </div>
 
             <div className={`grid grid-cols-1 gap-4 ${datePickerGrid}`}>
@@ -41,16 +42,17 @@ const Form = () => {
                     <label className="sr-only" htmlFor="name">When</label>
                     <DatePicker 
                         className="w-full p-3 text-sm border-gray-200 rounded-lg"
-                        selected={startDate} 
-                        onChange={(date) => setStartDate(date)} />
+                        selected={fromDate} 
+                        onChange={(date) => setFromDate(date)} />
                 </div>
 
                 <div className={whenInput}>
                     <label className="sr-only" htmlFor="name">Return</label>
                     <DatePicker 
-                        selected={startDate} 
-                        onChange={(date) => setStartDate(date)} 
-                        className={`w-full p-3 text-sm border-gray-200 rounded-lg`}/>
+                        className={`w-full p-3 text-sm border-gray-200 rounded-lg`}
+                        selected={toDate} 
+                        onChange={(date) => setToDate(date)} 
+                        />
                 </div>
             </div>
 

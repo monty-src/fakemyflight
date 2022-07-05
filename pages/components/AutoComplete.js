@@ -45,7 +45,6 @@ const AutoComplete = ({ label, }) => {
             setSelect(parseInt(select) - 1);
           break;
           case 'Enter':
-            console.log('enter');
             listRef.current.childNodes[select].click();
             setOptions([]);
             break;
@@ -60,44 +59,41 @@ const AutoComplete = ({ label, }) => {
     };
 
     useEffect(() => {
-      const checkIfClickedOutside = e => {
-        if (isMenuOpen && ref.current && !ref.current.contains(e.target)) {
-          setIsMenuOpen(false);
-          setSelect(-1);
+        const checkIfClickedOutside = e => {
+            if (isMenuOpen && ref.current && !ref.current.contains(e.target)) {
+                setIsMenuOpen(false);
+                setSelect(-1);
+            }
         }
-      }
-      document.addEventListener('mousedown', checkIfClickedOutside);
-      return () => {
-        document.removeEventListener('mousedown', checkIfClickedOutside);
-      }
+        document.addEventListener('mousedown', checkIfClickedOutside);
+        return () => {
+            document.removeEventListener('mousedown', checkIfClickedOutside);
+        }
     }, [isMenuOpen]);
 
     useEffect(() => {
         if(value) {
-          const configuration = {
-            method: 'GET',
-            url: `api/airports/${value}`,
-            headers: {
-              'X-RapidAPI-Key': process.env.API_KEY,
-              'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com'
-            }
-          };
+            const configuration = {
+                method: 'GET',
+                url: `api/airports/${value}`,
+                headers: {
+                    'X-RapidAPI-Key': process.env.API_KEY,
+                    'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com'
+                }
+            };
           
-          axios.request(configuration).then(function (response) {
-              if (response.data.name !== null) {
-                setOptions([
-                  `${response.data.code} - ${response.data.name}`
-                ]);
-                return false;
-              }
-              setOptions([ 'No results found' ]);
+            axios.request(configuration).then(function (response) {
+                if (response.data.name !== null) {
+                    setOptions([
+                        `${response.data.code} - ${response.data.name}`
+                    ]);
+                    return false;
+                }
+                setOptions([ 'No results found' ]);
           }).catch(function (error) {
-            setOptions([ 'No results found' ]);
-            console.error(error);
+                setOptions([ 'No results found' ]);
           });
         }
-
-
     }, [value]);
 
     return (
