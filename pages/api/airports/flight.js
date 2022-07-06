@@ -1,14 +1,14 @@
 import moment from 'moment';
-import JsonQuery from 'json-query';
-import flights from '../flights.json';
 
 export default function (req, res) {
-    
-    const airportFrom = 'CLT';
-    const aiportTo = 'JFK';
 
-    const fromDate = moment(new Date()).format('YYYY-MM-DD');
-    const toDate = moment(new Date()).format('YYYY-MM-DD');
+    console.log('request body: ', req.body);    
+    
+    // const airportFrom = 'CLT';
+    // const aiportTo = 'JFK';
+
+    // const fromDate = moment(new Date()).format('YYYY-MM-DD');
+    // const toDate = moment(new Date()).format('YYYY-MM-DD');
 
     // const legID = 'CLT-JFK:DL2232~11:DL5452~11:0';
 

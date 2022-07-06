@@ -12,9 +12,28 @@ const Form = () => {
     const [fromDate, setFromDate] = useState(new Date());
     const [toDate, setToDate] = useState('');
     const [radio, setRadio] = useState(0);
+    const [fromAirport, setFromAirport] = useState('');
+    const [toAirport, setToAirport] = useState('');
 
     const whenInput = (radio === 0) ? classNames('hidden') : classNames('opacity-100');
     const datePickerGrid = (radio === 0) ? classNames('sm:grid-cols-1') : classNames('sm:grid-cols-2');
+
+    const onSubmit = () => {
+
+        axios.post('http://localhost:3000/api/airports/flights', {
+            fromDate,
+            toDate,
+            radio,
+            fromAirport,
+            toAirport
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    };
     
     return (
         <div className="space-y-4">
@@ -30,8 +49,8 @@ const Form = () => {
             </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <AutoComplete label="From" />
-                <AutoComplete  label="To" />
+                <AutoComplete setAirport={setFromAirport} label="From" />
+                <AutoComplete setAirport={setToAirport} label="To" />
             </div>
 
             <div className={`grid grid-cols-1 gap-4 ${datePickerGrid}`}>
@@ -57,10 +76,10 @@ const Form = () => {
 
             <div className="mt-4">
                 <button
+                    onClick={onSubmit}
                     type="submit"
                     className="inline-flex items-center justify-center w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto">
                         <span className="font-medium"> Go</span>
-
                         <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-5 h-5 ml-3"

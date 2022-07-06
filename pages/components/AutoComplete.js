@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, Children } from 'react';
 import axios from 'axios';
 
-const AutoComplete = ({ label, }) => {
+const AutoComplete = ({ label, setAirport }) => {
     const ref = useRef();
     const listRef = useRef();
     const [value, setValue] = useState('');
@@ -13,15 +13,18 @@ const AutoComplete = ({ label, }) => {
         if (e.target.value === '') {
           setIsMenuOpen(false);
           setValue('');
+          setAirport('');
           return;
         }
         setValue(e.target.value);
+        setAirport(e.target.value);
         setOptions([]);
         setIsMenuOpen(true);
     };
 
     const onClick = e => {
         setValue(e.target.textContent.trim());
+        setAirport(e.target.textContent.trim());
         setIsMenuOpen(false);
     };
     
