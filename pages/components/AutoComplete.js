@@ -110,7 +110,7 @@ const AutoComplete = ({ label, setAirport }) => {
             type="text"
             placeholder={label}
             className={`
-              py-3 
+              py-3
               sm:text-md 
               placeholder-opacity-50 
               placeholder-white 

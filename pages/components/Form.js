@@ -39,10 +39,10 @@ const Form = ({setFlights}) => {
                     <div className="flex cursor-pointer w-full">
                         <button 
                             onClick={() => setRadio(0)}
-                            className={`border-[#10455a] ${radio === 0 && `bg-[#10455a]`} py-3 px-4 text-white rounded-l-lg border-2 w-full transition-all`}>One-Way</button>
+                            className={`border-[#10455a] ${radio === 0 && `bg-[#10455a]`} py-3 px-3 text-white rounded-l-lg border-2 w-full transition-all`}>One-Way</button>
                         <button 
                             onClick={() => setRadio(1)}
-                            className={`border-[#10455a] ${radio === 1 && `bg-[#10455a]`} py-3 px-4 text-white rounded-r-lg border-t-2 border-b-2 border-r-2 w-full transition-all`}>Round Trip</button>
+                            className={`border-[#10455a] ${radio === 1 && `bg-[#10455a]`} py-3 px-3 text-white rounded-r-lg border-t-2 border-b-2 border-r-2 w-full transition-all`}>Round Trip</button>
                     </div>
                 </div>
                 <div className="flex-grow invisible md:block hidden">
@@ -68,7 +68,7 @@ const Form = ({setFlights}) => {
                     <DatePicker 
                         placeholderText='Leave Date'
                         className="              
-                        py-3 
+                        py-3
                         sm:text-md 
                         placeholder-opacity-50 
                         placeholder-white 
