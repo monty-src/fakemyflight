@@ -109,7 +109,7 @@ const AutoComplete = ({ label, setAirport }) => {
             value={value}
             type="text"
             placeholder={label}
-            className="
+            className={`
               py-3 
               sm:text-md 
               placeholder-opacity-50 
@@ -121,22 +121,26 @@ const AutoComplete = ({ label, setAirport }) => {
               pr-4 
               rounded-xl 
               w-full
-              focus:ring-transparent" 
+              ${isMenuOpen && `rounded-t-xl rounded-b-none ring-transparent`}
+              focus:ring-transparent`}
             id={`${label}Airport`}/>
             {isMenuOpen &&  
-              <div className="absolute z-10 bg-white w-full" ref={listRef}>
+              <div className="absolute z-10 w-full" ref={listRef}>
                 {options.map((option, idx) => 
                   <div
                     key={idx}
                     onClick={onClick} 
                     className={`
+                      pt-4
+                      pb-4
                       p-2
+                      rounded-b-xl
+                      text-white
                       text-xs
-                      hover:border-2 
                       cursor-pointer
-                      border-gray-200 
-                      hover:border-blue-500 
-                      ${(idx === select) ? 'border-blue-500 border-2' : 'border-b-2'}`}>
+                      bg-[#10455a]
+                      hover:bg-[#0b2d3b]
+                      ${(idx === select) ? 'bg-[#0b2d3b]' : ''}`}>
                     {option}
                   </div>
                 )}         

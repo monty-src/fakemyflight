@@ -33,24 +33,36 @@ const Form = ({setFlights}) => {
     };
     
     return (
-        <div className="space-y-4">
-            <div className="flex">
-                <div className="form-check mr-10">
-                    <input checked={radio === 0} onChange={() => setRadio(0)} className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                    <label className="form-check-label inline-block text-white" htmlFor="flexRadioDefault1"> One way </label>
+        <div>
+            <div className="md:flex md:items-center mb-5">
+                <div className="flex-grow">
+                    <div className="flex cursor-pointer w-full">
+                        <button 
+                            onClick={() => setRadio(0)}
+                            className={`border-[#10455a] ${radio === 0 && `bg-[#10455a]`} py-3 px-4 text-white rounded-l-lg border-2 w-full transition-all`}>One-Way</button>
+                        <button 
+                            onClick={() => setRadio(1)}
+                            className={`border-[#10455a] ${radio === 1 && `bg-[#10455a]`} py-3 px-4 text-white rounded-r-lg border-t-2 border-b-2 border-r-2 w-full transition-all`}>Round Trip</button>
+                    </div>
                 </div>
-                <div className="form-check">
-                    <input checked={radio === 1} onChange={() => setRadio(1)} className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
-                    <label className="form-check-label inline-block text-white" htmlFor="flexRadioDefault2"> Round Trip </label>
+                <div className="flex-grow invisible md:block hidden">
+                    <div className="flex cursor-pointer w-full">
+                        <button 
+                            onClick={() => setRadio(0)}
+                            className={`border-[#10455a] ${radio === 1 && `bg-[#10455a]`} py-3 px-4 text-white rounded-l-lg border-2 w-full transition-all`} >One-Way</button>
+                        <button 
+                            onClick={() => setRadio(1)}
+                            className={`border-[#10455a] ${radio === 1 && `bg-[#10455a]`} py-3 px-4 bg-blue text-white rounded-r-lg border-t-2 border-b-2 border-r-2 w-full transition-all`}>Round Trip</button>
+                    </div>
                 </div>
             </div>
-            <p className="text-2xl text-white">Route</p>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <p className="text-2xl text-white mb-2">Route</p>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mb-5">
                 <AutoComplete setAirport={setFromAirport} label="From" />
                 <AutoComplete setAirport={setToAirport} label="To" />
             </div>
-            <p className="text-2xl text-white">Date</p>
-            <div className={`grid grid-cols-1 gap-4 ${datePickerGrid}`}>
+            <p className="text-2xl text-white mb-2">Date</p>
+            <div className={`grid grid-cols-1 gap-4 ${datePickerGrid} mb-10`}>
                 <div>
                     <label className="sr-only" htmlFor="name">When</label>
                     <DatePicker 
@@ -94,16 +106,14 @@ const Form = ({setFlights}) => {
                         />
                 </div>
             </div>
-
-            <div className="mt-4">
+            <div>
                 <button
                     onClick={onSubmit}
                     type="submit"
-                    className="inline-flex items-center justify-center w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto">
-                        <span className="font-medium"> Go</span>
+                    className="inline-flex items-center justify-center w-full px-3 py-3 text-white bg-[#10455a] rounded-lg sm:w-auto">
                         <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-5 h-5 ml-3"
+                        className="w-5 h-5"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor">
