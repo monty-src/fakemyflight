@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import moment from 'moment';
 import Head from 'next/head';
 
 import Form from './components/Form';
 import Navbar from './components/Navbar';
 
 export default function Home() {
+
+  const [ flights, setFlights ] = useState(false);
 
   return (
     <div>
@@ -15,10 +18,10 @@ export default function Home() {
       </Head>
       <Navbar />
       <main className="container lg">
-        <section className="bg-gray-100">
+        <section>
           <div className="max-w-screen-xl py-16 mx-auto sm:px-6 lg:px-8">
             <div className="grid ls-1 gap-x-16 gap-y-8 lg:grid-cols-5">
-              <div className="lg:py-12 lg:col-span-2">
+              <div className="lg:py-12 lg:col-span-2 text-white">
                 <h1 className="text-4xl font-medium mb-8">Generate your fake flight ticket here</h1>
                 <p className="max-w-xl text-lg">
                   Proof of Onward Travel is required by many countries before you even board an ✈️ airplane. 
@@ -29,12 +32,57 @@ export default function Home() {
                   <p>We use real flight data & real ticket template, to generate a dummy ticket. Must read FAQ before using 👇</p>
                 </div>
               </div>
-              <div className="p-8 bg-white rounded-lg shadow-lg lg:p-12 lg:col-span-3">
-                <Form />
+              <div className="p-8 lg:p-12 lg:col-span-3">
+                <Form
+                  setFlights={setFlights} 
+                />
               </div>
             </div>
           </div>
         </section>
+        {flights &&
+            <section className="container lg mt-10">
+                    {flights.map(({leg, fare}, idx) => (
+                        <section className="bg-gray-100 mt-10 rounded-sm shadow-lg" key={idx}>
+                            <div className="max-w-screen-xl py-16 mx-auto sm:px-6 lg:px-8">
+                                <div className="grid grid-cols-3">
+                                    <div>
+                                        <h2>{idx}</h2>
+                                        {leg.airlineCodes.map((airline, index) => <p key={index}>{airline}</p>)}
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <div>
+                                            <p>{new Date(leg.departureDateTime).toDateString()}</p>
+                                            <p>{moment(leg.departureDateTime).format('h:mm a')}</p>
+                                        </div>
+                                        <div>
+                                            <p>{new Date(leg.arrivalDateTime).toDateString()}</p>
+                                            <p>{moment(leg.arrivalDateTime).format('h:mm a')}</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <p className="ml-auto inline-flex w-full sm:w-auto line-through">${fare.price.amount}</p>
+                                        <p className="ml-auto inline-flex w-full sm:w-auto">$5.00</p>
+                                        <button
+                                            type="submit"
+                                            className="ml-auto inline-flex w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto">
+                                                <span className="font-medium">Select</span>
+                                                <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="w-5 h-5 ml-3"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                                </svg>
+                                        </button>
+                                    </div>
+                                </div> 
+                            </div>
+                        </section>
+                    ))}
+            </section> 
+        }
       </main>   
     </div>
   )

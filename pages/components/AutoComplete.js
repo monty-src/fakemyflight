@@ -109,7 +109,19 @@ const AutoComplete = ({ label, setAirport }) => {
             value={value}
             type="text"
             placeholder={label}
-            className="w-full p-3 text-sm border-gray-200 rounded-lg" 
+            className="
+              py-3 
+              sm:text-md 
+              placeholder-opacity-50 
+              placeholder-white 
+              border-none 
+              bg-[#10455a] 
+              text-white 
+              pl-4 
+              pr-4 
+              rounded-xl 
+              w-full
+              focus:ring-transparent" 
             id={`${label}Airport`}/>
             {isMenuOpen &&  
               <div className="absolute z-10 bg-white w-full" ref={listRef}>

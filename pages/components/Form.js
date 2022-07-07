@@ -7,7 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import AutoComplete from './AutoComplete';
 
 
-const Form = () => {
+const Form = ({setFlights}) => {
 
     const [fromDate, setFromDate] = useState(new Date());
     const [toDate, setToDate] = useState('');
@@ -18,21 +18,18 @@ const Form = () => {
     const whenInput = (radio === 0) ? classNames('hidden') : classNames('opacity-100');
     const datePickerGrid = (radio === 0) ? classNames('sm:grid-cols-1') : classNames('sm:grid-cols-2');
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
 
-        axios.post('http://localhost:3000/api/airports/flights', {
+        const response = await axios.post('http://localhost:3000/api/airports/flights', {
             fromDate,
             toDate,
             radio,
             fromAirport,
             toAirport
-          })
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+        });
+
+        setFlights(response.data);
+        
     };
     
     return (
@@ -40,25 +37,37 @@ const Form = () => {
             <div className="flex">
                 <div className="form-check mr-10">
                     <input checked={radio === 0} onChange={() => setRadio(0)} className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                    <label className="form-check-label inline-block text-gray-800" htmlFor="flexRadioDefault1"> One way </label>
+                    <label className="form-check-label inline-block text-white" htmlFor="flexRadioDefault1"> One way </label>
                 </div>
                 <div className="form-check">
                     <input checked={radio === 1} onChange={() => setRadio(1)} className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
-                    <label className="form-check-label inline-block text-gray-800" htmlFor="flexRadioDefault2"> Round Trip </label>
+                    <label className="form-check-label inline-block text-white" htmlFor="flexRadioDefault2"> Round Trip </label>
                 </div>
             </div>
-
+            <p className="text-2xl text-white">Route</p>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <AutoComplete setAirport={setFromAirport} label="From" />
                 <AutoComplete setAirport={setToAirport} label="To" />
             </div>
-
+            <p className="text-2xl text-white">Date</p>
             <div className={`grid grid-cols-1 gap-4 ${datePickerGrid}`}>
                 <div>
                     <label className="sr-only" htmlFor="name">When</label>
                     <DatePicker 
                         placeholderText='Leave Date'
-                        className="w-full p-3 text-sm border-gray-200 rounded-lg"
+                        className="              
+                        py-3 
+                        sm:text-md 
+                        placeholder-opacity-50 
+                        placeholder-white 
+                        border-none 
+                        bg-[#10455a] 
+                        text-white 
+                        pl-4 
+                        pr-4 
+                        rounded-xl 
+                        w-full
+                        focus:ring-transparent"
                         selected={fromDate} 
                         onChange={(date) => setFromDate(date)} />
                 </div>
@@ -67,7 +76,19 @@ const Form = () => {
                     <label className="sr-only" htmlFor="name">Return</label>
                     <DatePicker
                         placeholderText='Return Date'
-                        className={`w-full p-3 text-sm border-gray-200 rounded-lg`}
+                        className="
+                        py-3 
+                        sm:text-md 
+                        placeholder-opacity-50 
+                        placeholder-white 
+                        border-none 
+                        bg-[#10455a] 
+                        text-white 
+                        pl-4 
+                        pr-4 
+                        rounded-xl 
+                        w-full
+                        focus:ring-transparent" 
                         selected={toDate} 
                         onChange={(date) => setToDate(date)} 
                         />

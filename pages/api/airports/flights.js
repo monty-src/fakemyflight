@@ -1,6 +1,7 @@
 import axios from 'axios';
 import moment from 'moment';
 import JsonQuery from 'json-query';
+import mock from '../flights.json';
 
 export default async function (req, res) {
     const { fromDate, toDate, radio, fromAirport, toAirport } = req.body;    
@@ -9,24 +10,26 @@ export default async function (req, res) {
     const formattedFromDate = moment(fromDate).format('YYYY-MM-DD');
     const formattedToDate = moment(toDate).format('YYYY-MM-DD');
 
-    const requestURL = radio === 0 ? 
-    `https://api.flightapi.io/onewaytrip/${process.env.API_KEY}/${formattedFromAirport}/${formattedToAirport}/${formattedFromDate}/2/0/1/Economy/USD` :
-    `https://api.flightapi.io/roundtrip/${process.env.API_KEY}/${formattedFromAirport}/${formattedToAirport}/${formattedFromDate}/${formattedToDate}/2/0/1/Economy/USD`;
+    res.status(200).json(mock);
 
-    const response = await axios.get(requestURL, {});
-    const { data } = response;
+    // const requestURL = radio === 0 ? 
+    // `https://api.flightapi.io/onewaytrip/${process.env.API_KEY}/${formattedFromAirport}/${formattedToAirport}/${formattedFromDate}/2/0/1/Economy/USD` :
+    // `https://api.flightapi.io/roundtrip/${process.env.API_KEY}/${formattedFromAirport}/${formattedToAirport}/${formattedFromDate}/${formattedToDate}/2/0/1/Economy/USD`;
 
-    const { legs, trips, fares } = data;
-    const flightLegs = legs.map(leg => leg.id);
+    // const response = await axios.get(requestURL, {});
+    // const { data } = response;
 
-    const mutate = flightLegs.map(legID => {
-        const { value: tripIDs } = JsonQuery(`trips[legIds=${legID}]`, { data: { trips } });
-        const { id: tripID } = tripIDs;
-        const { value: fare } = JsonQuery(`fares[tripId=${tripID}]`, { data: { fares } });
-        const { value: leg } = JsonQuery(`legs[id=${legID}]`, { data: { legs } });
-        return {leg, fare, tripIDs};
-    });
+    // const { legs, trips, fares } = data;
+    // const flightLegs = legs.map(leg => leg.id);
 
-    res.status(200).json(mutate);
+    // const mutate = flightLegs.map(legID => {
+    //     const { value: tripIDs } = JsonQuery(`trips[legIds=${legID}]`, { data: { trips } });
+    //     const { id: tripID } = tripIDs;
+    //     const { value: fare } = JsonQuery(`fares[tripId=${tripID}]`, { data: { fares } });
+    //     const { value: leg } = JsonQuery(`legs[id=${legID}]`, { data: { legs } });
+    //     return {leg, fare, tripIDs};
+    // });
+
+    // res.status(200).json(mutate);
 
   }
