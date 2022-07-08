@@ -53,6 +53,7 @@ export default function Home() {
                                     <div className="bg-[#F4EBD0] text-zinc-700 border-dashed border-4 border-black rounded-lg text-sm">
                                         {leg.segments.map((segment, key) => 
                                             <div className="grid grid-row p-5" key={key}>
+                                                {key === 0 && <p className="ml-auto w-full sm:w-auto line-through text-center sm:text-left text-3xl">${fare.price.amount}</p>}
                                                 <p className="font-bold">{segment.airlineCode}</p>
                                                 <div>
                                                     <p className="mt-2"><strong>Departure:</strong> {segment.departureAirportCode}</p>
@@ -82,7 +83,6 @@ export default function Home() {
                                     </div>
                                 </div>
                                 <div className="flex flex-col items-center gap-5 sm:gap-1 sm:text-right">
-                                    <p className="ml-auto w-full sm:w-auto line-through text-center sm:text-left text-3xl">${fare.price.amount}</p>
                                     <p className="ml-auto w-full sm:w-auto text-center sm:text-left text-3xl">$5.00</p>
                                     <button
                                         type="submit"
