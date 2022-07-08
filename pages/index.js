@@ -38,51 +38,22 @@ export default function Home() {
             </div>
           </div>
         </section>
-        {/* {flights &&
+      </main>   
+      <Airports className="mt-10" />
+      {flights &&
             <section className="container lg mt-10">
+                    <h3>Results</h3>
                     {flights.map(({leg, fare}, idx) => (
-                        <section className="bg-gray-100 mt-10 rounded-sm shadow-lg" key={idx}>
-                            <div className="max-w-screen-xl mx-auto sm:px-6 lg:px-8">
-                                <div className="grid grid-cols-3">
-                                    <div>
-                                        <h2>{idx}</h2>
-                                        {leg.airlineCodes.map((airline, index) => <p key={index}>{airline}</p>)}
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <div>
-                                            <p>{new Date(leg.departureDateTime).toDateString()}</p>
-                                            <p>{moment(leg.departureDateTime).format('h:mm a')}</p>
-                                        </div>
-                                        <div>
-                                            <p>{new Date(leg.arrivalDateTime).toDateString()}</p>
-                                            <p>{moment(leg.arrivalDateTime).format('h:mm a')}</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <p className="ml-auto inline-flex w-full sm:w-auto line-through">${fare.price.amount}</p>
-                                        <p className="ml-auto inline-flex w-full sm:w-auto">$5.00</p>
-                                        <button
-                                            type="submit"
-                                            className="ml-auto inline-flex w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto">
-                                                <span className="font-medium">Select</span>
-                                                <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                className="w-5 h-5 ml-3"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                                </svg>
-                                        </button>
-                                    </div>
-                                </div> 
+                        <section className="bg-[#10455a] mt-10 rounded-lg shadow-lg p-5" key={idx}>
+                            <div className="max-w-screen-xl mx-auto">
+                                <div className="grid grid-cols-3 text-white">
+                                    testing something right now
+                                </div>
                             </div>
                         </section>
                     ))}
             </section> 
-        } */}
-      </main>   
-      <Airports className="mt-10" />
+        }
     </div>
   )
 }
