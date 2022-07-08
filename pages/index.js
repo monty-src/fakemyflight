@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import Head from 'next/head';
+import { ArrowRightIcon } from '@heroicons/react/outline';
+
 
 import Form from './components/Form';
 import Airports from './components/Airports';
+
 export default function Home() {
 
   const [ flights, setFlights ] = useState(false);
@@ -30,7 +33,7 @@ export default function Home() {
                   <p>We use real flight data & real ticket template, to generate a dummy ticket. Must read FAQ before using 👇</p>
                 </div>
               </div>
-              <div className="py-8 lg:py-12 lg:col-span-3">
+              <div className="p-8 lg:py-12 lg:col-span-3">
                 <Form
                   setFlights={setFlights} 
                 />
@@ -45,40 +48,50 @@ export default function Home() {
                 {flights.map(({leg, fare}, idx) => (
                     <section className="mt-10 rounded-lg p-8" key={idx}>
                         <div className="max-w-screen-xl mx-auto">
-                            <div className="grid grid-cols-1 text-white sm:grid-cols-3 bg-[#10455a] p-8 lg:p-12 ">
-                                <div>
-                                    <ul>
-                                        {leg.airlineCodes.map((airline, index) => <li key={index}>{airline}</li>)}
-                                    </ul>
+                            <div className="grid grid-cols-1 text-white sm:grid-cols-[1fr_2fr_1fr] bg-[#10455a] p-8 lg:p-8 hover:shadow-2xl rounded-lg">
+                                <div className="grid grid-rows-1 gap-y-5">
+                                    <div className="bg-[#F4EBD0] text-zinc-700 border-dashed border-4 border-black rounded-lg text-sm">
+                                        {leg.segments.map((segment, key) => 
+                                            <div className="grid grid-row p-5" key={key}>
+                                                <p className="font-bold">{segment.airlineCode}</p>
+                                                <div>
+                                                    <p className="mt-2"><strong>Departure:</strong> {segment.departureAirportCode}</p>
+                                                    <p>{moment(new Date(segment.departureDateTime).toDateString()).format('MMMM Do YYYY')} {moment(segment.departureDateTime).format('h:mm a')}</p>
+                                                    <p className="mt-2"><strong>Arrival:</strong> {segment.arrivalAirportCode}</p>
+                                                    <p>{moment(new Date(segment.arrivalDateTime).toDateString()).format('MMMM Do YYYY')} {moment(segment.arrivalDateTime).format('h:mm a')}</p>
+                                                </div>
+                                                <div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
-                                <div className="flex justify-between">
+                                <div className="flex justify-evenly items-center text-center sm:text-3xl">
                                     <div>
-                                        <p>{new Date(leg.departureDateTime).toDateString()}</p>
-                                        <p>{moment(leg.departureDateTime).format('h:mm a')}</p>
+                                        <p className="text-xl">{moment(new Date(leg.departureDateTime).toDateString()).format('MMM Do')}</p>
+                                        <p className="text-xl">{moment(leg.departureDateTime).format('h:mm a')}</p>
+                                        <p className="font-bold sm:text-6xl">{leg.departureAirportCode}</p>
+                                    </div>
+                                    <div className="font-white">
+                                      <ArrowRightIcon className="h-10 sm:h-20 font-white" />
                                     </div>
                                     <div>
-                                        <p>{new Date(leg.arrivalDateTime).toDateString()}</p>
-                                        <p>{moment(leg.arrivalDateTime).format('h:mm a')}</p>
+                                        <p className="text-xl">{moment(new Date(leg.arrivalDateTime).toDateString()).format('MMM Do')}</p>
+                                        <p className="text-xl">{moment(leg.arrivalDateTime).format('h:mm a')}</p>
+                                        <p className="font-bold sm:text-6xl">{leg.arrivalAirportCode}</p>
                                     </div>
                                 </div>
-                                <div className="flex flex-col">
-                                    <p className="ml-auto inline-flex w-full sm:w-auto line-through">${fare.price.amount}</p>
-                                    <p className="ml-auto inline-flex w-full sm:w-auto">$5.00</p>
+                                <div className="flex flex-col items-center gap-5 sm:gap-1 sm:text-right">
+                                    <p className="ml-auto w-full sm:w-auto line-through text-center sm:text-left text-3xl">${fare.price.amount}</p>
+                                    <p className="ml-auto w-full sm:w-auto text-center sm:text-left text-3xl">$5.00</p>
                                     <button
                                         type="submit"
-                                        className="ml-auto inline-flex w-full px-5 py-3 text-white bg-black rounded-lg sm:w-auto">
+                                        className="px-5 py-3 text-white bg-black rounded-lg w-4/12 sm:ml-auto">
                                             <span className="font-medium">Select</span>
-                                            <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="w-5 h-5 ml-3"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                            </svg>
                                     </button>
                                 </div>
                             </div>
+                            <div></div>
                         </div>
                     </section>
                 ))}
