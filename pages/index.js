@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import Head from 'next/head';
-import { ArrowRightIcon } from '@heroicons/react/outline';
+import { ArrowRightIcon, PlusIcon, MinusIcon } from '@heroicons/react/outline';
 
 
 import Form from './components/Form';
@@ -74,7 +74,7 @@ export default function Home() {
                                         <p className="font-bold sm:text-6xl">{leg.departureAirportCode}</p>
                                     </div>
                                     <div className="font-white">
-                                      <ArrowRightIcon className="h-10 sm:h-20 font-white" />
+                                      <ArrowRightIcon className="h-10 sm:h-16 font-white" />
                                     </div>
                                     <div>
                                         <p className="text-xl">{moment(new Date(leg.arrivalDateTime).toDateString()).format('MMM Do')}</p>
@@ -82,16 +82,150 @@ export default function Home() {
                                         <p className="font-bold sm:text-6xl">{leg.arrivalAirportCode}</p>
                                     </div>
                                 </div>
-                                <div className="flex flex-col items-center gap-5 sm:gap-1 sm:text-right">
-                                    <p className="ml-auto w-full sm:w-auto text-center sm:text-left text-3xl">$5.00</p>
+                                <div className="flex items-center ">
                                     <button
                                         type="submit"
-                                        className="px-5 py-3 text-white bg-black rounded-lg w-4/12 sm:ml-auto">
-                                            <span className="font-medium">Select</span>
+                                        className="px-5 py-3 text-white bg-[#06202A] rounded-lg w-[100%] hover:shadow-2xl">
+                                            <span className="font-medium">$5.00</span>
                                     </button>
                                 </div>
                             </div>
-                            <div></div>
+                            <div className="bg-[#F4EBD0] p-8 border-dashed border-4 border-t-0 border-black">
+ 
+                                <div className="grid grid-cols-1 md:grid-cols-2">
+                                    <div className="grid gap-y-5">
+                                        <div className="grid grid-rows-1 gap-5">
+                                            <div className="grid grid-cols-2 justify-evenly">
+                                                <div className="flex">
+                                                    <button
+                                                        className="
+                                                            px-2
+                                                            rounded-l-lg
+                                                            bg-[#c4b589]">
+                                                        <MinusIcon className="h-5" />
+                                                    </button>
+                                                    <input
+                                                        className="
+                                                        text-center
+                                                        py-3
+                                                        w-6/12
+                                                        h-10
+                                                        sm:text-md 
+                                                        placeholder-black 
+                                                        border-none 
+                                                        bg-[#c4b589]
+                                                        text-black 
+                                                        pl-4 
+                                                        pr-4 
+                                                        focus:ring-transparent"
+                                                        type="text" value="Adults 1" />
+                                                    <button
+                                                        className="
+                                                            px-2
+                                                            rounded-r-lg
+                                                            bg-[#c4b589]">
+                                                            <PlusIcon className="h-5" />
+                                                    </button>
+                                                </div>
+                                                <div className="flex">
+                                                    <button
+                                                        className="
+                                                            px-2
+                                                            rounded-l-lg
+                                                            bg-[#c4b589]">
+                                                        <MinusIcon className="h-5" />
+                                                    </button>                                                   
+                                                     <input
+                                                        className="
+                                                        text-center
+                                                        py-3
+                                                        w-6/12
+                                                        h-10
+                                                        sm:text-md 
+                                                        placeholder-black 
+                                                        border-none 
+                                                        bg-[#c4b589]
+                                                        text-black 
+                                                        pl-4 
+                                                        pr-4 
+                                                        focus:ring-transparent" 
+                                                        type="text" value="Children 0" />
+                                                    <button
+                                                        className="
+                                                        px-2
+                                                        rounded-r-lg
+                                                        bg-[#c4b589]">
+                                                            <PlusIcon className="h-5" />
+                                                    </button>                                                
+                                                </div>
+                                            </div>
+                                            <div className="grid grid-cols-2 gap-5">
+                                                <div>
+                                                    <label className="sr-only" htmlFor="firstName">First Name</label>
+                                                    <input 
+                                                        type="text"
+                                                        placeholder="First Name"
+                                                        className={`
+                                                        py-3
+                                                        sm:text-md 
+                                                        placeholder-black 
+                                                        border-none 
+                                                        bg-[#c4b589]
+                                                        text-black 
+                                                        pl-4 
+                                                        pr-4 
+                                                        rounded-xl 
+                                                        focus:ring-transparent
+                                                        w-full`}
+                                                        id="firstName"/>
+                                                </div>
+                                                <div>
+                                                    <label className="sr-only" htmlFor="lastName">Last Name</label>
+                                                    <input 
+                                                        type="text"
+                                                        placeholder="Last Name"
+                                                        className={`
+                                                        py-3
+                                                        sm:text-md 
+                                                        placeholder-black 
+                                                        border-none 
+                                                        bg-[#c4b589]
+                                                        text-black 
+                                                        pl-4 
+                                                        pr-4 
+                                                        rounded-xl 
+                                                        focus:ring-transparent
+                                                        w-full`}
+                                                        id="lastName"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label className="sr-only" htmlFor="email">Email</label>
+                                            <input 
+                                                type="email"
+                                                placeholder="Email"
+                                                className={`
+                                                py-3
+                                                sm:text-md 
+                                                placeholder-black 
+                                                border-none 
+                                                bg-[#c4b589]
+                                                text-black 
+                                                pl-4 
+                                                pr-4 
+                                                rounded-xl 
+                                                focus:ring-transparent
+                                                w-full`}
+                                                id="email"/>
+                                        </div>
+                                        <div className="text-center">
+                                            Total: $5:00
+                                        </div>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </div>
                         </div>
                     </section>
                 ))}
