@@ -91,72 +91,19 @@ export default function Home() {
                                 </div>
                             </div>
                             <div className="bg-[#F4EBD0] p-8 border-dashed border-4 border-t-0 border-black">
- 
                                 <div className="grid grid-cols-1 md:grid-cols-2">
                                     <div className="grid gap-y-5">
                                         <div className="grid grid-rows-1 gap-5">
-                                            <div className="grid grid-cols-2 justify-evenly">
+                                            <div class="flex flex-row gap-x-5 text-xs">
                                                 <div className="flex">
-                                                    <button
-                                                        className="
-                                                            px-2
-                                                            rounded-l-lg
-                                                            bg-[#c4b589]">
-                                                        <MinusIcon className="h-5" />
-                                                    </button>
-                                                    <input
-                                                        className="
-                                                        text-center
-                                                        py-3
-                                                        w-6/12
-                                                        h-10
-                                                        sm:text-md 
-                                                        placeholder-black 
-                                                        border-none 
-                                                        bg-[#c4b589]
-                                                        text-black 
-                                                        pl-4 
-                                                        pr-4 
-                                                        focus:ring-transparent"
-                                                        type="text" value="Adults 1" />
-                                                    <button
-                                                        className="
-                                                            px-2
-                                                            rounded-r-lg
-                                                            bg-[#c4b589]">
-                                                            <PlusIcon className="h-5" />
-                                                    </button>
+                                                    <button className="p-1 px-2 rounded-l-lg bg-white hover:bg-zinc-200"><MinusIcon className="h-3" /></button>
+                                                    <div className="p-1 px-3 bg-[#c4b589]">Adults <span>1</span></div>
+                                                    <button className="p-1 px-2 rounded-r-lg bg-white hover:bg-zinc-200"><PlusIcon className="h-3" /></button>
                                                 </div>
                                                 <div className="flex">
-                                                    <button
-                                                        className="
-                                                            px-2
-                                                            rounded-l-lg
-                                                            bg-[#c4b589]">
-                                                        <MinusIcon className="h-5" />
-                                                    </button>                                                   
-                                                     <input
-                                                        className="
-                                                        text-center
-                                                        py-3
-                                                        w-6/12
-                                                        h-10
-                                                        sm:text-md 
-                                                        placeholder-black 
-                                                        border-none 
-                                                        bg-[#c4b589]
-                                                        text-black 
-                                                        pl-4 
-                                                        pr-4 
-                                                        focus:ring-transparent" 
-                                                        type="text" value="Children 0" />
-                                                    <button
-                                                        className="
-                                                        px-2
-                                                        rounded-r-lg
-                                                        bg-[#c4b589]">
-                                                            <PlusIcon className="h-5" />
-                                                    </button>                                                
+                                                    <button className="p-1 px-2 rounded-l-lg bg-white hover:bg-zinc-200"><MinusIcon className="h-3" /></button>
+                                                    <div className="p-1 px-3 bg-[#c4b589]">Children <span>1</span></div>
+                                                    <button className="p-1 px-2 rounded-r-lg bg-white hover:bg-zinc-200"><PlusIcon className="h-3" /></button>
                                                 </div>
                                             </div>
                                             <div className="grid grid-cols-2 gap-5">
@@ -164,35 +111,39 @@ export default function Home() {
                                                     <label className="sr-only" htmlFor="firstName">First Name</label>
                                                     <input 
                                                         type="text"
+                                                        autoComplete='off'
                                                         placeholder="First Name"
-                                                        className={`
-                                                        py-3
+                                                        className="
+                                                        p-2
+                                                        pl-4
+                                                        text-sm
                                                         sm:text-md 
+                                                        placeholder-opacity-50
                                                         placeholder-black 
                                                         border-none 
                                                         bg-[#c4b589]
                                                         text-black 
-                                                        pl-4 
-                                                        pr-4 
                                                         rounded-xl 
                                                         focus:ring-transparent
-                                                        w-full`}
+                                                        w-full"
                                                         id="firstName"/>
                                                 </div>
                                                 <div>
                                                     <label className="sr-only" htmlFor="lastName">Last Name</label>
                                                     <input 
                                                         type="text"
+                                                        autoComplete='off'
                                                         placeholder="Last Name"
                                                         className={`
-                                                        py-3
+                                                        p-2
+                                                        pl-4
+                                                        text-sm
                                                         sm:text-md 
+                                                        placeholder-opacity-50
                                                         placeholder-black 
                                                         border-none 
                                                         bg-[#c4b589]
                                                         text-black 
-                                                        pl-4 
-                                                        pr-4 
                                                         rounded-xl 
                                                         focus:ring-transparent
                                                         w-full`}
@@ -206,24 +157,20 @@ export default function Home() {
                                                 type="email"
                                                 placeholder="Email"
                                                 className={`
-                                                py-3
-                                                sm:text-md 
+                                                p-2
+                                                pl-4
+                                                text-sm
                                                 placeholder-black 
                                                 border-none 
                                                 bg-[#c4b589]
                                                 text-black 
-                                                pl-4 
-                                                pr-4 
+                                                placeholder-opacity-50
                                                 rounded-xl 
                                                 focus:ring-transparent
                                                 w-full`}
                                                 id="email"/>
                                         </div>
-                                        <div className="text-center">
-                                            Total: $5:00
-                                        </div>
                                     </div>
-                                    <div></div>
                                 </div>
                             </div>
                         </div>
