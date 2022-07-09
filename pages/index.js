@@ -3,7 +3,7 @@ import moment from 'moment';
 import Head from 'next/head';
 import { ArrowRightIcon, PlusIcon, MinusIcon } from '@heroicons/react/outline';
 
-
+import Info from './components/Info';
 import Form from './components/Form';
 import Airports from './components/Airports';
 
@@ -12,6 +12,28 @@ export default function Home() {
   const [ flights, setFlights ] = useState(false);
   const [ adults, setAdults ] = useState(1);
   const [ children, setChildren ] = useState(0);
+
+  const adultsClicked = (which, value) => {
+    if (which === '-' && value === 0) {
+        setAdults(1);
+        return false
+    } else if (value === 6) {
+        setAdults(5);
+        return false;
+    }
+    setAdults(value);
+  };
+  
+  const childrenClicked = (which, value) => {
+    if (which === '-' && value === -1) {
+        setChildren(0);
+        return false
+    } else if (value === 6) {
+        setChildren(5);
+        return false;
+    }
+    setChildren(value);
+  };
 
   return (
     <div>
@@ -24,22 +46,8 @@ export default function Home() {
         <section>
           <div className="max-w-screen-xl pt-16 mx-auto lg:px-8">
             <div className="grid ls-1 gap-x-16 gap-y-8 lg:grid-cols-5">
-              <div className="lg:col-span-2 p-8 text-white">
-                <h1 className="text-4xl font-medium mb-8">Generate your fake flight ticket here</h1>
-                <p className="max-w-xl text-lg">
-                  Proof of Onward Travel is required by many countries before you even board an ✈️ airplane. 
-                  If you'd like to keep your travel options open & travel on one-way tickets, this hack is perfect for you! 
-                  Use this for pranks and anything you like, except for real flights.
-                </p>
-                <div className="mt-8">
-                  <p>We use real flight data & real ticket template, to generate a dummy ticket. Must read FAQ before using 👇</p>
-                </div>
-              </div>
-              <div className="p-8 lg:py-12 lg:col-span-3">
-                <Form
-                  setFlights={setFlights} 
-                />
-              </div>
+                <Info />    
+                <Form setFlights={setFlights} />
             </div>
           </div>
         </section>
@@ -96,16 +104,16 @@ export default function Home() {
                                 <div className="grid grid-cols-1 md:grid-cols-2">
                                     <div className="grid gap-y-5">
                                         <div className="grid grid-rows-1 gap-5">
-                                            <div class="flex flex-row gap-x-3 text-xs">
+                                            <div className="flex flex-row gap-x-3 text-xs">
                                                 <div className="flex">
-                                                    <button onClick={() => setAdults(adults - 1)} className="p-1 px-2 rounded-l-lg bg-white hover:bg-zinc-200"><MinusIcon className="h-3" /></button>
+                                                    <button onClick={() => adultsClicked('-', (adults - 1))} className="p-1 px-2 rounded-l-lg bg-white hover:bg-zinc-200"><MinusIcon className="h-3" /></button>
                                                     <div className="p-1 px-3 bg-[#c4b589]">Adults <span>{adults}</span></div>
-                                                    <button onClick={() => setAdults(adults + 1)} className="p-1 px-2 rounded-r-lg bg-white hover:bg-zinc-200"><PlusIcon className="h-3" /></button>
+                                                    <button onClick={() => adultsClicked('+', (adults + 1))} className="p-1 px-2 rounded-r-lg bg-white hover:bg-zinc-200"><PlusIcon className="h-3" /></button>
                                                 </div>
                                                 <div className="flex">
-                                                    <button onClick={() => setChildren(children - 1)} className="p-1 px-2 rounded-l-lg bg-white hover:bg-zinc-200"><MinusIcon className="h-3" /></button>
+                                                    <button onClick={() => childrenClicked('-', (children - 1))} className="p-1 px-2 rounded-l-lg bg-white hover:bg-zinc-200"><MinusIcon className="h-3" /></button>
                                                     <div className="p-1 px-3 bg-[#c4b589]">Children <span>{children}</span></div>
-                                                    <button onClick={() => setChildren(children + 1)} className="p-1 px-2 rounded-r-lg bg-white hover:bg-zinc-200"><PlusIcon className="h-3" /></button>
+                                                    <button onClick={() => childrenClicked('+', (children + 1))} className="p-1 px-2 rounded-r-lg bg-white hover:bg-zinc-200"><PlusIcon className="h-3" /></button>
                                                 </div>
                                             </div>
                                             <div className="grid grid-cols-2 gap-5">
