@@ -4,6 +4,7 @@ import { PlusIcon, MinusIcon } from '@heroicons/react/outline';
 import Person from './Person';
 
 const Checkout = ({
+    email,
     setEmail,
     addFormFields,
     handleCheckout,
@@ -80,6 +81,7 @@ const Checkout = ({
             </div>
             <button
                 type="submit"
+                value={email}
                 onClick={handleCheckout}
                 className="px-5 py-3 text-white bg-[#06202A] rounded-lg w-[100%] hover:shadow-2xl">
                     <span className="font-medium">Purchase</span>

@@ -126,6 +126,7 @@ export default function Home() {
                                     <div className="grid gap-y-5">
 
                                         <Checkout
+                                            email={email}
                                             setEmail={setEmail}
                                             handleCheckout={handleCheckout}
                                             addFormFields={addFormFields}

@@ -4,11 +4,10 @@ import { ArrowRightIcon, PlusIcon, MinusIcon } from '@heroicons/react/outline';
 export const Person = ({
     idx,
     label,
+    person,
     handleFormCheckoutValues
 }) => {
-
     const lowerCaseLabel = label.toLowerCase();
-
   return (
         <>
             <p>{label} {idx + 1}</p>
@@ -20,6 +19,7 @@ export const Person = ({
                             type="text"
                             name="firstName"
                             autoComplete='off'
+                            value={person.firstName || ''}
                             placeholder="First Name"
                             className="
                             p-2
@@ -43,6 +43,7 @@ export const Person = ({
                             type="text"
                             name="lastName"
                             autoComplete='off'
+                            value={person.lastName || ''}
                             placeholder="Last Name"
                             className="
                             p-2
@@ -62,27 +63,6 @@ export const Person = ({
                     </div>
                 </div>
             </div>
-            {/* <div>
-                <label className="sr-only" htmlFor="email">Email</label>
-                <input 
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    className="
-                    p-2
-                    pl-4
-                    text-sm
-                    placeholder-black 
-                    border-none 
-                    bg-[#c4b589]
-                    text-black 
-                    placeholder-opacity-50
-                    rounded-xl 
-                    focus:ring-transparent
-                    w-full"
-                    id="email"
-                    onChange={e => handleFormCheckoutValues(idx, lowerCaseLabel, e)} />
-            </div> */}
         </>  
     )   
 }
