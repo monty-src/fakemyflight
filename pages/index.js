@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import Head from 'next/head';
+import Image from 'next/image';
+import Info from '../components/Info';
+import Form from '../components/Form';
+import Person from '../components/Person';
+import Airports from '../components/Airports';
+import Checkout from '../components/Checkout';
 
-import Info from './components/Info';
-import Form from './components/Form';
-import Person from './components/Person';
-import Airports from './components/Airports';
-import Checkout from './components/Checkout';
+import Sample from '../public/sample.png';
 
 import { ArrowRightIcon } from '@heroicons/react/outline';
 

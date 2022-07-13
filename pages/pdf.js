@@ -118,7 +118,7 @@ assistance requests should be confirmed directly with the airline.</p>
                                     <p>DFW 22:13</p>
                                 </div>
                                 <div className="basis-2/6">
-                                    <p className="text-right">2h 2m</p>
+                                    <p className="text-right mr-2">2h 2m</p>
                                 </div>
                             </div>
                             <div className="col-span-3 mt-2 border-black border-dotted border-b-2 ">
@@ -126,7 +126,7 @@ assistance requests should be confirmed directly with the airline.</p>
                                 <p>Economy ( Q ) | Confirm seats with the airline*</p>
                             </div>
                             <div className="pb-0 col-span-3 ">
-                                <p className="text-right border-black border-dotted border-b-2">Layover: 8h 37m</p>
+                                <p className="text-right border-black border-dotted border-b-2 pr-2">Layover: 8h 37m</p>
                             </div>
                         </div>
                         <div className="grid grid-rows-3 grid-flow-col gap-x-2 pl-8">
@@ -147,7 +147,7 @@ assistance requests should be confirmed directly with the airline.</p>
                                     <p>LAX 8:16</p>
                                 </div>
                                 <div className="basis-2/6">
-                                    <p className="text-right">1h 26m</p>
+                                    <p className="text-right mr-2">1h 26m</p>
                                 </div>
                             </div>
                             <div className="mt-2 col-span-3 ">
@@ -197,6 +197,13 @@ assistance requests should be confirmed directly with the airline.</p>
                         <div className="flex flex-col-2 justify-between p-2">
                             <p className="text-right basis-1/2">Total: </p>
                             <p>$452.00</p>
+                        </div>
+                        <div className="py-2 mt-10 border-gray-200 border-solid border-b-2">
+                            <p className="ml-2 font-thin">Additional Flight Services </p> 
+                        </div>
+                        <div className="text-sm font-thin p-2 border-gray-200 border-solid border-b-2">
+                            <p>The airlne may change additional fees (Opens in a new window.) for checked
+                            baggage or other optional services</p>
                         </div>
                     </div>
                 </div>
