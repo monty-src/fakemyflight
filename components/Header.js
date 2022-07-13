@@ -2,8 +2,8 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <header>
-        <p>logo goes here</p>
+    <header className="lg:col-span-5">
+        <h2 className="text-white text-2xl">Logo</h2>
     </header>
   )
 }
