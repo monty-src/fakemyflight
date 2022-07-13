@@ -84,7 +84,6 @@ const Form = ({setFlights}) => {
                             selected={fromDate} 
                             onChange={(date) => setFromDate(date)} />
                     </div>
-
                     <div className={whenInput}>
                         <label className="sr-only" htmlFor="name">Return</label>
                         <DatePicker
