@@ -100,7 +100,7 @@ const AutoComplete = ({ label, setAirport }) => {
     }, [value]);
 
     return (
-        <div className="relative" ref={ref}>
+        <div className="relative col-span-3" ref={ref}>
           <label className="sr-only" htmlFor="name">{label}</label>
           <input 
             autoComplete="off"
