@@ -2,10 +2,8 @@ import React from 'react';
 
 const Results = ({ children }) => {
   return (
-    <section className="container lg mt-20 p-5">
-        <div className="bg-[#10455a] p-5 rounded-lg grid grid-cols-1 md:grid-cols-6">
-          {children}  
-        </div>
+    <section className="container lg my-20 p-5 grid gap-y-10">
+      {children}  
     </section>
   )
 }
