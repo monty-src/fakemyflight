@@ -18,7 +18,7 @@ const official = () => {
         <main className="container lg grid grid-cols-1 gap-10 lg:gap-y-20 lg:grid-cols-5">
             <Header />
             <Masthead colSize={2}>Content</Masthead>
-            <Masthead colSize={3}> <MainForm /> </Masthead>
+            <Masthead colSize={3}><MainForm /></Masthead>
         </main>
     </>
   )
