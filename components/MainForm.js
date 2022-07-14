@@ -4,9 +4,12 @@ import FlightType from './FlightType';
 import DatePickers from './DatePickers';
 import AutoComplete from './AutoComplete';
 
-const MainForm = () => {
+const MainForm = ({
+    radio,
+    setRadio, 
+    setFlights
+}) => {
 
-    const [radio, setRadio] = useState(0);
     const [toDate, setToDate] = useState('');
     const [toAirport, setToAirport] = useState('');
     const [fromAirport, setFromAirport] = useState('');
@@ -16,15 +19,14 @@ const MainForm = () => {
     const returnDatePickerClasses = `${(radio === 0) ? 'hidden' : 'opacity-100 col-span-6 sm:col-span-3'}`;
 
     const onSubmit = async () => {
-        const response = await axios.post('http://localhost:3000/api/airports/flights', {
+        const response = await axios.post('http://localhost:3000/api/airports/flights?oneWay=true', {
             fromDate,
             toDate,
             radio,
             fromAirport,
             toAirport
         });
-        console.log('response: ', response.data)
-        // setFlights(response.data);
+        setFlights(response.data);
     };
 
     return (
