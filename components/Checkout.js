@@ -57,7 +57,7 @@ const Checkout = ({
                     length={formChildrenCheckoutValues.length}
                     handleFormCheckoutValues={handleFormCheckoutValues} />)}
             <div>
-                <p className="mb-5 mt-10">E-mail</p>
+                <p className="mb-5 mt-5">E-mail</p>
                 <label className="sr-only" htmlFor="email">Email</label>
                 <input 
                     type="email"

@@ -1,149 +1,117 @@
 import React, { useState } from 'react';
-import moment from 'moment';
+
 import Head from 'next/head';
 import Image from 'next/image';
-import Info from '../components/Info';
-import Form from '../components/Form';
-import Person from '../components/Person';
-import Airports from '../components/Airports';
-import Checkout from '../components/Checkout';
 
-import Sample from '../public/sample.png';
+import Header from '../components/Header';
+import MainForm from '../components/MainForm';
+import Masthead from '../components/Masthead';
 
-import { ArrowRightIcon } from '@heroicons/react/outline';
+import Results from '../components/Results';
 
-export default function Home() {
-    
-    const [ flights, setFlights ] = useState(false);
-    
-    const checkoutValuesInputs = { firstName: '', lastName: ''};
-    const [ email, setEmail ] = useState('');
-    const [ formChildrenCheckoutValues, setChildrenFormCheckoutValues ] = useState([]);
-    const [ formAdultsCheckoutValues, setAdultsFormCheckoutValues ] = useState([ checkoutValuesInputs ]);
+import OneWay from '../components/Oneway';
+import RoundTrip from '../components/RoundTrip';
 
-    const handleCheckout = () => {
-        console.log('email: ', email);
-        console.log('adults inputs: ', formAdultsCheckoutValues);
-        console.log('children inputs: ', formChildrenCheckoutValues);
-    };
+const official = () => {
+  
+  const [flights, setFlights] = useState(false);
+  const [radio, setRadio] = useState(0);
 
-    const handleFormCheckoutValues = (i, label, e) => {
-        if (label === 'adult') {
-            let newFormValues = [...formAdultsCheckoutValues];
-            newFormValues[i][e.target.name] = e.target.value;
-            setAdultsFormCheckoutValues(newFormValues);
-            return false;
-        }
-        let newFormValues = [...formChildrenCheckoutValues];
-        newFormValues[i][e.target.name] = e.target.value;
-        setChildrenFormCheckoutValues(newFormValues);
-    };
+  const checkoutValuesInputs = { firstName: '', lastName: ''};
+  const [ email, setEmail ] = useState('');
+  const [ payment, setPayment ] = useState({});
+  const [ formChildrenCheckoutValues, setChildrenFormCheckoutValues ] = useState([]);
+  const [ formAdultsCheckoutValues, setAdultsFormCheckoutValues ] = useState([ checkoutValuesInputs ]);
 
-    const addFormFields = person => {
-        if (person === 'adult') {
-            setAdultsFormCheckoutValues([ ...formAdultsCheckoutValues, checkoutValuesInputs ]);
-            return false;
-        }
-        setChildrenFormCheckoutValues([ ...formChildrenCheckoutValues, checkoutValuesInputs ]);
-    }
+  const handleCheckout = () => {
+      console.log('email: ', email);
+      console.log('adults inputs: ', formAdultsCheckoutValues);
+      console.log('children inputs: ', formChildrenCheckoutValues);
+  };
 
-    const removeFormFields = (i, person) => {
-        if (i === 0 && person === 'adult') return false;
-        if (person === 'adult') {
-            const newFormValues = [...formAdultsCheckoutValues];
-            newFormValues.splice(i, 1);
-            setAdultsFormCheckoutValues(newFormValues);
-            return false;            
-        }
-        const newFormValues = [...formChildrenCheckoutValues];
-        newFormValues.splice(i, 1);
-        setChildrenFormCheckoutValues(newFormValues);
-    }
+  const handleFormCheckoutValues = (i, label, e) => {
+      if (label === 'adult') {
+          let newFormValues = [...formAdultsCheckoutValues];
+          newFormValues[i][e.target.name] = e.target.value;
+          setAdultsFormCheckoutValues(newFormValues);
+          return false;
+      }
+      let newFormValues = [...formChildrenCheckoutValues];
+      newFormValues[i][e.target.name] = e.target.value;
+      setChildrenFormCheckoutValues(newFormValues);
+  };
+
+  const addFormFields = person => {
+      if (person === 'adult') {
+          setAdultsFormCheckoutValues([ ...formAdultsCheckoutValues, checkoutValuesInputs ]);
+          return false;
+      }
+      setChildrenFormCheckoutValues([ ...formChildrenCheckoutValues, checkoutValuesInputs ]);
+  }
+
+  const removeFormFields = (i, person) => {
+      if (i === 0 && person === 'adult') return false;
+      if (person === 'adult') {
+          const newFormValues = [...formAdultsCheckoutValues];
+          newFormValues.splice(i, 1);
+          setAdultsFormCheckoutValues(newFormValues);
+          return false;            
+      }
+      const newFormValues = [...formChildrenCheckoutValues];
+      newFormValues.splice(i, 1);
+      setChildrenFormCheckoutValues(newFormValues);
+  }
+
+  const oneWay = (radio === 0);
+  const roundTrip = (radio === 1);
+
+
+  const toggleHide = (index) => {
+    setPayment({
+      ...payment,
+      [index]: !payment[index]
+    });
+  };
 
   return (
-    <div>
-      <Head>
-        <title>Create Next App</title>
-        <meta name="description" content="Generated by create next app" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main className="container lg">
-        <section>
-          <div className="max-w-screen-xl pt-16 mx-auto lg:px-8">
-            <div className="grid ls-1 gap-x-16 gap-y-8 lg:grid-cols-5">
-                <Info />    
-                <Form setFlights={setFlights} />
-            </div>
-          </div>
-        </section>
-      </main>   
-      <Airports className="mt-10" />
-      {flights &&
-            <section className="max-w-screen-xl pt-16 mx-auto lg:px-8">
-                {flights.map(({leg, fare}, idx) => (
-                    <section className="mt-10 rounded-lg p-8" key={idx}>
-                        <div className="max-w-screen-xl mx-auto">
-                            <div className="grid grid-cols-1 text-white sm:grid-cols-[1fr_2fr_1fr] bg-[#10455a] p-8 lg:p-8 hover:shadow-2xl rounded-lg">
-                                <div className="grid grid-rows-1 gap-y-5">
-                                    <div className="bg-[#F4EBD0] text-zinc-700 border-dashed border-4 border-black rounded-lg text-sm">
-                                        {leg.segments.map((segment, key) => 
-                                            <div className="grid grid-row p-5" key={key}>
-                                                {key === 0 && <p className="ml-auto w-full sm:w-auto line-through text-center sm:text-left text-3xl">${fare.price.amount}</p>}
-                                                <p className="font-bold">{segment.airlineCode}</p>
-                                                <div>
-                                                    <p className="mt-2"><strong>Departure:</strong> {segment.departureAirportCode}</p>
-                                                    <p>{moment(new Date(segment.departureDateTime).toDateString()).format('MMMM Do YYYY')} {moment(segment.departureDateTime).format('h:mm a')}</p>
-                                                    <p className="mt-2"><strong>Arrival:</strong> {segment.arrivalAirportCode}</p>
-                                                    <p>{moment(new Date(segment.arrivalDateTime).toDateString()).format('MMMM Do YYYY')} {moment(segment.arrivalDateTime).format('h:mm a')}</p>
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                                <div className="flex justify-evenly items-center text-center sm:text-3xl">
-                                    <div>
-                                        <p className="text-xl">{moment(new Date(leg.departureDateTime).toDateString()).format('MMM Do')}</p>
-                                        <p className="text-xl">{moment(leg.departureDateTime).format('h:mm a')}</p>
-                                        <p className="font-bold sm:text-6xl">{leg.departureAirportCode}</p>
-                                    </div>
-                                    <div className="font-white">
-                                      <ArrowRightIcon className="h-10 sm:h-16 font-white" />
-                                    </div>
-                                    <div>
-                                        <p className="text-xl">{moment(new Date(leg.arrivalDateTime).toDateString()).format('MMM Do')}</p>
-                                        <p className="text-xl">{moment(leg.arrivalDateTime).format('h:mm a')}</p>
-                                        <p className="font-bold sm:text-6xl">{leg.arrivalAirportCode}</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center ">
-                                    <button
-                                        type="submit"
-                                        className="px-5 py-3 text-white bg-[#06202A] rounded-lg w-[100%] hover:shadow-2xl">
-                                            <span className="font-medium">$5.00</span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="bg-[#F4EBD0] p-8 border-dashed border-4 border-t-0 border-black">
-                                <div className="grid grid-cols-1 md:grid-cols-2">
-                                    <div className="grid gap-y-5">
-
-                                        <Checkout
-                                            email={email}
-                                            setEmail={setEmail}
-                                            handleCheckout={handleCheckout}
-                                            addFormFields={addFormFields}
-                                            removeFormFields={removeFormFields} 
-                                            handleFormCheckoutValues={handleFormCheckoutValues}
-                                            formAdultsCheckoutValues={formAdultsCheckoutValues}
-                                            formChildrenCheckoutValues={formChildrenCheckoutValues}  />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                ))}
-            </section> 
+    <>
+        <Head>
+            <title>FakeMyFlight</title>
+            <meta name="description" content="Generated by create next app" />
+            <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <main className="container lg p-5 grid grid-cols-1 gap-10 lg:gap-y-20 lg:grid-cols-5">
+            <Header />
+            <Masthead colSize={2}>Content</Masthead>
+            <Masthead colSize={3}>
+              <MainForm 
+                radio={radio} 
+                setRadio={setRadio} 
+                setFlights={setFlights} />
+              </Masthead>
+        </main>
+        {flights &&
+          <Results>
+            {(flights && oneWay) && 
+              <OneWay 
+                data={flights} 
+                payment={payment}
+                email={email}
+                toggleHide={toggleHide}
+                setEmail={setEmail}
+                addFormFields={addFormFields}
+                handleCheckout={handleCheckout}
+                removeFormFields={removeFormFields}
+                handleFormCheckoutValues={handleFormCheckoutValues}
+                formAdultsCheckoutValues={formAdultsCheckoutValues}
+                formChildrenCheckoutValues={formChildrenCheckoutValues}
+            />}
+            {(flights && roundTrip) && <RoundTrip data={flights} />}
+          </Results>
         }
-    </div>
+
+    </>
   )
 }
+
+export default official;

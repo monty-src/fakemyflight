@@ -4,7 +4,7 @@ import Checkout from './Checkout';
 
 const Results = ({ children}) => {
   return (
-    <section className="container lg my-20 p-5 grid gap-y-20">
+    <section className="container lg mb-10 p-5 grid gap-y-10">
       {children}
     </section>
   )

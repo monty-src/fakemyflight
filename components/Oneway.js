@@ -22,7 +22,7 @@ export const OneWay = ({
     formChildrenCheckoutValues
 }) => (data.map(({leg, fare}, key) => {
     return (
-        <section key={key} className="mb-20">
+        <section key={key} className="mb-10">
             <section className="bg-[#10455a] p-5 rounded-lg grid grid-cols-1 lg:grid-cols-[1fr_2fr_1fr] gap-0 gap-y-20 lg:gap-5 lg:gap-y-0">
                 <section className="p-5 bg-[#F4EBD0] text-zinc-700 border-dashed border-4 border-black rounded-lg">
                     <div className="grid grid-cols-4">
