@@ -69,7 +69,7 @@ export const OneWay = ({
                 </section>
             </section>
             <div className={`bg-[#F4EBD0] p-8 border-dashed border-4 border-t-0 border-black ${!payment[key] && 'hidden'}`}>
-                <div className="grid grid-cols-1 md:grid-cols-2">
+                <div className="grid grid-cols-1">
                     <div className="grid gap-y-5">
                         <Checkout
                             email={email}
