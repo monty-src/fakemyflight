@@ -17,8 +17,61 @@ const official = () => {
   const [flights, setFlights] = useState(false);
   const [radio, setRadio] = useState(0);
 
+  const checkoutValuesInputs = { firstName: '', lastName: ''};
+  const [ email, setEmail ] = useState('');
+  const [ payment, setPayment ] = useState({});
+  const [ formChildrenCheckoutValues, setChildrenFormCheckoutValues ] = useState([]);
+  const [ formAdultsCheckoutValues, setAdultsFormCheckoutValues ] = useState([ checkoutValuesInputs ]);
+
+  const handleCheckout = () => {
+      console.log('email: ', email);
+      console.log('adults inputs: ', formAdultsCheckoutValues);
+      console.log('children inputs: ', formChildrenCheckoutValues);
+  };
+
+  const handleFormCheckoutValues = (i, label, e) => {
+      if (label === 'adult') {
+          let newFormValues = [...formAdultsCheckoutValues];
+          newFormValues[i][e.target.name] = e.target.value;
+          setAdultsFormCheckoutValues(newFormValues);
+          return false;
+      }
+      let newFormValues = [...formChildrenCheckoutValues];
+      newFormValues[i][e.target.name] = e.target.value;
+      setChildrenFormCheckoutValues(newFormValues);
+  };
+
+  const addFormFields = person => {
+      if (person === 'adult') {
+          setAdultsFormCheckoutValues([ ...formAdultsCheckoutValues, checkoutValuesInputs ]);
+          return false;
+      }
+      setChildrenFormCheckoutValues([ ...formChildrenCheckoutValues, checkoutValuesInputs ]);
+  }
+
+  const removeFormFields = (i, person) => {
+      if (i === 0 && person === 'adult') return false;
+      if (person === 'adult') {
+          const newFormValues = [...formAdultsCheckoutValues];
+          newFormValues.splice(i, 1);
+          setAdultsFormCheckoutValues(newFormValues);
+          return false;            
+      }
+      const newFormValues = [...formChildrenCheckoutValues];
+      newFormValues.splice(i, 1);
+      setChildrenFormCheckoutValues(newFormValues);
+  }
+
   const oneWay = (radio === 0);
   const roundTrip = (radio === 1);
+
+
+  const toggleHide = (index) => {
+    setPayment({
+      ...payment,
+      [index]: !payment[index]
+    });
+  };
 
   return (
     <>
@@ -39,7 +92,20 @@ const official = () => {
         </main>
         {flights &&
           <Results>
-            {(flights && oneWay) && <OneWay data={flights} />}
+            {(flights && oneWay) && 
+              <OneWay 
+                data={flights} 
+                payment={payment}
+                email={email}
+                toggleHide={toggleHide}
+                setEmail={setEmail}
+                addFormFields={addFormFields}
+                handleCheckout={handleCheckout}
+                removeFormFields={removeFormFields}
+                handleFormCheckoutValues={handleFormCheckoutValues}
+                formAdultsCheckoutValues={formAdultsCheckoutValues}
+                formChildrenCheckoutValues={formChildrenCheckoutValues}
+            />}
             {(flights && roundTrip) && <RoundTrip data={flights} />}
           </Results>
         }

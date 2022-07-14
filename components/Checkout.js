@@ -14,7 +14,6 @@ const Checkout = ({
     formChildrenCheckoutValues
 }) => {
 
-
     return (
         <>
             <div className="flex flex-row gap-x-3 text-xs">
@@ -63,6 +62,7 @@ const Checkout = ({
                 <input 
                     type="email"
                     name="email"
+                    autoComplete="off"
                     placeholder="Email"
                     className="
                     p-2
