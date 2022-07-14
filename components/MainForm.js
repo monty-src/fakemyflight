@@ -41,7 +41,7 @@ const MainForm = () => {
                 setFromDate={setFromDate}
                 leaveClasses={leaveDatePickerClasses}
                 returnClasses={returnDatePickerClasses} />
-            <button className="mt-5 inline-flex items-center justify-center w-full px-3 py-3 text-white bg-[#10455a] rounded-lg sm:w-auto" onClick={onSubmit}>
+            <button className="mt-10 inline-flex items-center justify-center w-full px-3 py-3 text-white bg-[#10455a] rounded-lg sm:w-auto" onClick={onSubmit}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="w-5 h-5"
