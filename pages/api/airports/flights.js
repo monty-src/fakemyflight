@@ -1,7 +1,7 @@
 import axios from 'axios';
 import JsonQuery from 'json-query';
 
-import { validateFlightsRequest } from '../../../utils/schema';
+import { validateFlightRequest } from '../../../utils/schema';
 import { transformFlightRequest } from '../../../utils/mutate';
 import { oneWayApi, roundTripApi } from '../../../utils/urls';
 
@@ -9,7 +9,7 @@ const { API_KEY } = process.env;
 
 export default async function (req, res) {
   const { value: requestBody, error: requestSchemaError } =
-    validateFlightsRequest(req.body);
+    validateFlightRequest(req.body);
 
   if (requestSchemaError) return res.status(400).json({ requestSchemaError });
 
@@ -23,8 +23,6 @@ export default async function (req, res) {
 
   const flightApiIoResponse = await axios.get(flightApiIoRequestURL, {});
   const { data: flightApiIoData } = flightApiIoResponse;
-
-  console.log('flight api rsponse: ', flightApiIoData);
 
   const { legs, trips, fares, airlines, airports } = flightApiIoData;
 
@@ -47,8 +45,6 @@ export default async function (req, res) {
 
     return oneWay ? { leg, fare } : { leg, second_leg, fare };
   });
-
-  console.log('resposne container: ', responseContainer);
 
   res.status(200).json(responseContainer);
 
