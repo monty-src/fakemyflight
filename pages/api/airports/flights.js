@@ -21,15 +21,24 @@ export default async function (req, res) {
   const flightApiIoRequestURL = oneWay
     ? oneWayApi(API_KEY, fromAirport, toAirport, fromDate)
     : roundTripApi(API_KEY, fromAirport, toAirport, fromDate, toDate);
-  
-  const response = await axios.get(flightApiIoRequestURL, {});
-  const { data: flightApiIoData } = response;
 
-  console.log('flightApiIoData: ', flightApiIoData);
+  const flightApiIoResponse = await axios.get(flightApiIoRequestURL, {});
+  const { data: flightApiIoData } = flightApiIoResponse;
 
   const { legs, trips, fares, airlines, airports } = flightApiIoData;
-  
-  
+
+  const responseContainer = trips.map(({ id: tripID, legIds }) => {
+    const { value: leg } = JsonQuery(`legs[id=${legIds[0]}]`, {
+      data: { legs },
+    });
+
+    const { value: fare } = JsonQuery(`fares[tripId=${tripID}]`, {
+      data: { legs },
+    });
+  });
+
+  res.status(200).json({ data: responseContainer });
+
   // const { legs, trips, fares, airlines, airports } =
   //   oneWayFlight === 'true' ? oneWay : twoWay;
 
