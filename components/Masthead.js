@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 const Masthead = ({ children, colSize }) => {
   return (
     <section className={`lg:col-span-${colSize} text-white`}>
-        {children}
+      {children}
     </section>
-  )
-}
+  );
+};
 
-export default Masthead
+export default Masthead;
