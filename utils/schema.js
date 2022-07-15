@@ -4,6 +4,7 @@ import moment from 'moment';
 export const extractAiport = (airport) => airport.slice(0, 3).toUpperCase();
 
 export const DATE_FORMAT = 'MM-DD-YYYY';
+export const API_DATE_FORMAT = 'YYYY-MM-DD';
 
 export const validateFlightsRequest = (data) => {
   let { fromDate, toDate, radio, fromAirport, toAirport } = data;

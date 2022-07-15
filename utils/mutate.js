@@ -17,7 +17,7 @@ export const transformFlightRequest = ({
   const oneWay = radio === 0;
 
   fromDate = moment(fromDate).format(DATE_FORMAT);
-  toDate = oneWay ? moment(fromDate).format(DATE_FORMAT) : null;
+  toDate = oneWay ? null : moment(toDate).format(DATE_FORMAT);
 
   fromAirport = extractAiport(fromAirport);
   toAirport = extractAiport(toAirport);

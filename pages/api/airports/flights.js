@@ -4,30 +4,32 @@ import JsonQuery from 'json-query';
 
 import { validateFlightsRequest } from '../../../utils/schema';
 import { transformFlightRequest } from '../../../utils/mutate';
+import { oneWayApi, roundTripApi } from '../../../utils/urls';
+
+const { API_KEY } = process.env;
 
 export default async function (req, res) {
   const { value: requestBody, error: requestSchemaError } =
     validateFlightsRequest(req.body);
 
-  console.log('requestSchemaError: ', requestSchemaError);
-  console.log('request body: ', requestBody);
-  const transformedRequestBody = transformFlightRequest(requestBody);
-  console.log('transformformed request body: ', transformedRequestBody)
-
   if (requestSchemaError) return res.status(400).json({ requestSchemaError });
 
-  // console.log('request body: ', reqBody);
-  // const oneWayFlight = req.query.oneWay;
-  // const oneWayFlight = (radio === 0);
+  const transformedRequestBody = transformFlightRequest(requestBody);
+  const { oneWay, fromAirport, toAirport, fromDate, toDate } =
+    transformedRequestBody;
 
-  // const requestURL = oneWayFlight ?
-  // `https://api.flightapi.io/onewaytrip/${process.env.API_KEY}/${formattedFromAirport}/${formattedToAirport}/${formattedFromDate}/2/0/1/Economy/USD` :
-  // `https://api.flightapi.io/roundtrip/${process.env.API_KEY}/${formattedFromAirport}/${formattedToAirport}/${formattedFromDate}/${formattedToDate}/2/0/1/Economy/USD`;
+  const flightApiIoRequestURL = oneWay
+    ? oneWayApi(API_KEY, fromAirport, toAirport, fromDate)
+    : roundTripApi(API_KEY, fromAirport, toAirport, fromDate, toDate);
+  
+  const response = await axios.get(flightApiIoRequestURL, {});
+  const { data: flightApiIoData } = response;
 
-  // const response = await axios.get(requestURL, {});
-  // const { data } = response;
+  console.log('flightApiIoData: ', flightApiIoData);
 
-  // const { legs, trips, fares } = data;
+  const { legs, trips, fares, airlines, airports } = flightApiIoData;
+  
+  
   // const { legs, trips, fares, airlines, airports } =
   //   oneWayFlight === 'true' ? oneWay : twoWay;
 
