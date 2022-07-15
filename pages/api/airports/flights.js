@@ -3,22 +3,21 @@ import moment from 'moment';
 import JsonQuery from 'json-query';
 
 import { validateFlightsRequest } from '../../../utils/schema';
+import { transformFlightRequest } from '../../../utils/mutate';
 
 export default async function (req, res) {
   const { value: requestBody, error: requestSchemaError } =
     validateFlightsRequest(req.body);
-  console.log('requestBody: ', requestBody);
+
   console.log('requestSchemaError: ', requestSchemaError);
+  console.log('request body: ', requestBody);
+  const transformedRequestBody = transformFlightRequest(requestBody);
+  console.log('transformformed request body: ', transformedRequestBody)
+
+  if (requestSchemaError) return res.status(400).json({ requestSchemaError });
+
   // console.log('request body: ', reqBody);
-
   // const oneWayFlight = req.query.oneWay;
-
-  // const { fromDate, toDate, radio, fromAirport, toAirport } = req.body;
-  // const formattedFromAirport = fromAirport.slice(0, 3).toUpperCase();
-  // const formattedToAirport = toAirport.slice(0, 3).toUpperCase();
-  // const formattedFromDate = moment(fromDate).format('YYYY-MM-DD');
-  // const formattedToDate = moment(toDate).format('YYYY-MM-DD');
-
   // const oneWayFlight = (radio === 0);
 
   // const requestURL = oneWayFlight ?
