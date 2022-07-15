@@ -12,3 +12,14 @@ export const timeConvert = n => {
 
 export const dateTime = n => 
     `${moment(new Date(n).toDateString()).format('MMMM Do')} ${moment(n).format('h:mm a')}`;
+
+export const toHoursAndMinutes = totalMinutes => {
+    const minutes = totalMinutes % 60;
+    const hours = Math.floor(totalMinutes / 60);
+
+    return `${padTo2Digits(hours)}:${padTo2Digits(minutes)}`;
+}
+
+function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+}

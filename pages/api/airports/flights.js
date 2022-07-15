@@ -4,6 +4,7 @@ import JsonQuery from 'json-query';
 
 import oneWay from '../one-way.json';
 import twoWay from '../two-way.json';
+import { toHoursAndMinutes } from '../../../utils/datetime-utils';
 
 export default async function (req, res) {
     const oneWayFlight = req.query.oneWay;
@@ -24,12 +25,30 @@ export default async function (req, res) {
     // const { data } = response;
 
     // const { legs, trips, fares } = data;
-    const { legs, trips, fares } = (oneWayFlight === 'true' ? oneWay : twoWay);
+    const { legs, trips, fares, airlines, airports } = (oneWayFlight === 'true' ? oneWay : twoWay);
+
+    console.log('airlines: ', airlines);
 
     const flightInformationFormatted = oneWayFlight === 'true' ? 
       trips.map(({id, legIds}) => {
         const leg = JsonQuery(`legs[id=${legIds[0]}]`, { data: { legs } }).value;
         const { value: fare } = JsonQuery(`fares[tripId=${id}]`, { data: { fares } }); 
+        leg.segments = leg.segments.map(segment => {
+          const { airlineCode, durationMinutes, stopoverDurationMinutes, departureAirportCode, arrivalAirportCode } = segment;
+          const verboseAirline = JsonQuery(`airlines[code=${airlineCode}]`, { data: { airlines } }).value.name;
+          const verboseDurationMinutes = toHoursAndMinutes(durationMinutes);
+          const verboseStopOverDurationMinutes = toHoursAndMinutes(stopoverDurationMinutes);
+          const verboseDepartureAirportCode= JsonQuery(`airports[code=${departureAirportCode}]`, { data: { airports } }).value.name;
+          const verboseArrivalAirportCode= JsonQuery(`airports[code=${arrivalAirportCode}]`, { data: { airports } }).value.name;
+          return {
+            ...segment, 
+            verboseAirline, 
+            verboseDurationMinutes, 
+            verboseStopOverDurationMinutes, 
+            verboseDepartureAirportCode, 
+            verboseArrivalAirportCode
+          };
+        });
         return { leg, fare };
       }) :
       trips.map(({id, legIds}) => {

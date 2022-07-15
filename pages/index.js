@@ -84,7 +84,7 @@ const official = () => {
             <Header />
             <Masthead colSize={2}>Content</Masthead>
             <Masthead colSize={3}>
-              <MainForm 
+              <MainForm
                 radio={radio} 
                 setRadio={setRadio} 
                 setFlights={setFlights} />

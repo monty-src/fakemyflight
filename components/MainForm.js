@@ -31,7 +31,7 @@ const MainForm = ({
 
     return (
         <section className="grid grid-cols-6 gap-5">
-            <FlightType radio={radio} setRadio={setRadio} />
+            <FlightType resetFlights={setFlights} radio={radio} setRadio={setRadio} />
             <p className="col-span-6 text-3xl mt-5">Route</p>
             <AutoComplete setAirport={setFromAirport} label="Form" />
             <AutoComplete setAirport={setToAirport} label="To" />

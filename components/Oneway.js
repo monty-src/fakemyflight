@@ -26,9 +26,9 @@ export const OneWay = ({
             <section className="bg-[#10455a] p-5 rounded-lg grid grid-cols-1 lg:grid-cols-[1fr_2fr_1fr] gap-0 gap-y-20 lg:gap-5 lg:gap-y-0">
                 <section className="p-5 bg-[#F4EBD0] text-zinc-700 border-dashed border-4 border-black rounded-lg">
                     <div className="grid grid-cols-4">
-                        <ul>
-                            {leg.airlineCodes.map((airlineCode, index) =>
-                                <li className="font-bold text-2xl" key={index}>{airlineCode}</li>
+                        <ul className="col-start-1 col-end-3">
+                            {leg.segments.map(({verboseAirline}, index) =>
+                                <li className="font-bold text-base" key={index}>{verboseAirline}</li>
                             )}
                         </ul>
                         <div className="text-right col-start-3 col-end-5">
@@ -40,8 +40,8 @@ export const OneWay = ({
                                 <div key={index}>
                                     <p className="font-bold mt-8">{segment.designatorCode}</p>
                                     <p className="font-bold mb-5">Duration: <span className="font-normal">{timeConvert(segment.durationMinutes)}</span></p>
-                                    <p className="font-bold">Departure: <span className="font-normal">{segment.departureAirportCode}</span></p>                                
-                                    <p className="font-bold">Arrival: <span className="font-normal">{segment.arrivalAirportCode}</span></p>
+                                    <p className="font-bold">Departure: <span className="font-normal">{segment.departureAirportCode} - {segment.verboseDepartureAirportCode}</span></p>                                
+                                    <p className="font-bold">Arrival: <span className="font-normal">{segment.arrivalAirportCode} - {segment.verboseArrivalAirportCode}</span></p>
                                 </div> 
                             )}
                         </div>
