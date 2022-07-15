@@ -1,5 +1,4 @@
 import axios from 'axios';
-import moment from 'moment';
 import JsonQuery from 'json-query';
 
 import { validateFlightsRequest } from '../../../utils/schema';
@@ -25,19 +24,33 @@ export default async function (req, res) {
   const flightApiIoResponse = await axios.get(flightApiIoRequestURL, {});
   const { data: flightApiIoData } = flightApiIoResponse;
 
+  console.log('flight api rsponse: ', flightApiIoData);
+
   const { legs, trips, fares, airlines, airports } = flightApiIoData;
 
   const responseContainer = trips.map(({ id: tripID, legIds }) => {
+    let second_leg = false;
+
     const { value: leg } = JsonQuery(`legs[id=${legIds[0]}]`, {
       data: { legs },
     });
 
+    second_leg = oneWay
+      ? second_leg
+      : JsonQuery(`legs[id=${legIds[1]}]`, {
+          data: { legs },
+        });
+
     const { value: fare } = JsonQuery(`fares[tripId=${tripID}]`, {
-      data: { legs },
+      data: { fares },
     });
+
+    return oneWay ? { leg, fare } : { leg, second_leg, fare };
   });
 
-  res.status(200).json({ data: responseContainer });
+  console.log('resposne container: ', responseContainer);
+
+  res.status(200).json(responseContainer);
 
   // const { legs, trips, fares, airlines, airports } =
   //   oneWayFlight === 'true' ? oneWay : twoWay;
