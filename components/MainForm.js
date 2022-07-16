@@ -13,13 +13,14 @@ const MainForm = ({ radio, setRadio, setFlights }) => {
   const leaveDatePickerClasses = `col-span-6 ${
     radio === 0 ? 'col-span-6' : 'sm:col-span-3'
   }`;
+
   const returnDatePickerClasses = `${
     radio === 0 ? 'hidden' : 'opacity-100 col-span-6 sm:col-span-3'
   }`;
 
   const onSubmit = async () => {
     const response = await axios.post(
-      'http://localhost:3000/api/airports/flights?oneWay=true',
+      'http://localhost:3000/api/airports/flights',
       {
         fromDate,
         toDate,

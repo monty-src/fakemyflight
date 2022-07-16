@@ -33,7 +33,7 @@ export const OneWay = ({
               </ul>
               <div className="text-right col-start-3 col-end-5">
                 <p className="font-bold text-4xl lg:text-2xl line-through">
-                  ${fare.price.amount}.00
+                  ${fare.amount}.00
                 </p>
                 <p className="text-xl">$5.00</p>
               </div>
