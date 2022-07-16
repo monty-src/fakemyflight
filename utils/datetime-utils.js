@@ -10,6 +10,12 @@ export const timeConvert = (n) => {
   return rhours + ' hr  ' + rminutes + ' min';
 };
 
+export const extractDate = (date) =>
+  moment(new Date(date).toDateString()).format('MMM Do');
+
+export const extractTime = (date) =>
+  moment(date).format('h:mm a');
+
 export const dateTime = (n) =>
   `${moment(new Date(n).toDateString()).format('MMMM Do')} ${moment(n).format(
     'h:mm a'

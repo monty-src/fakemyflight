@@ -23,6 +23,17 @@ export const verboseArrivalAirportCode = (arrivalAirportCode, airports) =>
   JsonQuery(`airports[code=${arrivalAirportCode}]`, { data: { airports } })
     .value.name;
 
+export const sortByOneWayTripDuration = (container) =>
+  container.sort((a, b) => a.leg.durationMinutes - b.leg.durationMinutes);
+
+export const sortByRoundTripDuration = (container) =>
+  container.sort(
+    (a, b) =>
+      a.leg.durationMinutes +
+      a.second_leg.durationMinutes -
+      (b.leg.durationMinutes + b.second_leg.durationMinutes)
+  );
+
 export const transformFlightRequest = ({
   radio,
   fromDate,
@@ -39,31 +50,4 @@ export const transformFlightRequest = ({
   toAirport = extractAiport(toAirport);
 
   return { oneWay, fromDate, toDate, fromAirport, toAirport };
-};
-
-export const truncatelegs = (segments, airlines, airports) => {
-  console.log('segments: ', segments);
-  return segments.map(
-    ({
-      airlineCode,
-      durationMinutes,
-      stopoverDurationMinutes,
-      departureAirportCode,
-      arrivalAirportCode,
-    }) => ({
-      arrivalAirportCode,
-      departureAirportCode,
-      airline: verboseAirline(airlineCode, airlines),
-      durationMinutes: verboseDurationMinutes(durationMinutes),
-      stopOverMinutes: verboseStopOverMinutes(stopoverDurationMinutes),
-      departureAirportCode: verboseDeparetureAirportCode(
-        departureAirportCode,
-        airports
-      ),
-      arrivalAirportCode: verboseArrivalAirportCode(
-        arrivalAirportCode,
-        airports
-      ),
-    })
-  );
 };
