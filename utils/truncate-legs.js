@@ -4,7 +4,7 @@ import {
   verboseArrivalAirportCode,
 } from './mutate';
 
-import { timeConvert, toHoursAndMinutes, extractTime, extractDate } from './datetime-utils';
+import { timeConvert, extractTime, extractDate } from './datetime-utils';
 
 export default (leg, airlines, airports) => {
   const {

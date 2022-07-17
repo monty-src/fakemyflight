@@ -21,11 +21,3 @@ export const dateTime = (n) =>
   `${moment(new Date(n).toDateString()).format('MMMM Do')} ${moment(n).format(
     'h:mm a'
   )}`;
-
-export const toHoursAndMinutes = (totalMinutes) => {
-  const minutes = totalMinutes % 60;
-  const hours = Math.floor(totalMinutes / 60);
-  return `${padTo2Digits(hours)}:${padTo2Digits(minutes)}`;
-};
-
-const padTo2Digits = (num) => num.toString().padStart(2, '0');
