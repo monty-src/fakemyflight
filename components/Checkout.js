@@ -90,17 +90,17 @@ const Checkout = ({
           autoComplete="off"
           placeholder="Email"
           className="
-                    p-2
-                    pl-4
-                    text-sm
-                    placeholder-black 
-                    border-none 
-                    bg-[#c4b589]
-                    text-black 
-                    placeholder-opacity-50
-                    rounded-xl 
-                    focus:ring-transparent
-                    w-full"
+            p-2
+            pl-4
+            text-sm
+            placeholder-black 
+            border-none 
+            bg-[#c4b589]
+            text-black 
+            placeholder-opacity-50
+            rounded-xl 
+            focus:ring-transparent
+            w-full"
           id="email"
           onChange={(e) => setEmail(e.target.value)}
         />

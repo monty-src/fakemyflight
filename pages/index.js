@@ -45,12 +45,19 @@ const official = () => {
 
   const addFormFields = (person) => {
     if (person === 'adult') {
-      setAdultsFormCheckoutValues([
+      const adults = [
         ...formAdultsCheckoutValues,
         checkoutValuesInputs,
-      ]);
+      ];
+      if (adults.length === 6) return false;
+      setAdultsFormCheckoutValues(adults);
       return false;
     }
+    const children = [
+      ...formChildrenCheckoutValues,
+      checkoutValuesInputs,
+    ];
+    if (children.length === 6) return false;
     setChildrenFormCheckoutValues([
       ...formChildrenCheckoutValues,
       checkoutValuesInputs,
@@ -111,7 +118,21 @@ const official = () => {
               formChildrenCheckoutValues={formChildrenCheckoutValues}
             />
           )}
-          {flights && roundTrip && <RoundTrip data={flights} />}
+          {flights && roundTrip && (
+            <RoundTrip
+              data={flights}
+              payment={payment}
+              email={email}
+              toggleHide={toggleHide}
+              setEmail={setEmail}
+              addFormFields={addFormFields}
+              handleCheckout={handleCheckout}
+              removeFormFields={removeFormFields}
+              handleFormCheckoutValues={handleFormCheckoutValues}
+              formAdultsCheckoutValues={formAdultsCheckoutValues}
+              formChildrenCheckoutValues={formChildrenCheckoutValues}
+            />
+          )}
         </Results>
       )}
     </>

@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from 'moment';
 import { ArrowRightIcon } from '@heroicons/react/outline';
-import { timeConvert } from '../utils/datetime-utils';
 
 import Checkout from './Checkout';
 
