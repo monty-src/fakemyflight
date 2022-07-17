@@ -16,8 +16,16 @@ export const OneWay = ({
   handleFormCheckoutValues,
   formAdultsCheckoutValues,
   formChildrenCheckoutValues,
+  setAdultsFormCheckoutValues,
+  setChildrenFormCheckoutValues,
 }) =>
   data.map(({ leg, fare }, key) => {
+    const handleSlideDown = (key) => {
+      toggleHide(key);
+      setAdultsFormCheckoutValues([{ firstName: '', lastName: '' }]);
+      setChildrenFormCheckoutValues([]);
+    };
+
     return (
       <section key={key} className="mb-10">
         <section className="bg-[#10455a] p-5 rounded-lg grid grid-cols-1 lg:grid-cols-[1fr_2fr_1fr] gap-0 gap-y-20 lg:gap-5 lg:gap-y-0">
@@ -86,7 +94,7 @@ export const OneWay = ({
           </section>
           <section className="flex items-center">
             <button
-              onClick={(e) => toggleHide(key)}
+              onClick={(e) => handleSlideDown(key)}
               type="submit"
               className="px-5 py-3 text-white bg-[#06202A] rounded-lg w-[100%] hover:shadow-xl"
             >

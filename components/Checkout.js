@@ -113,7 +113,9 @@ const Checkout = ({
         onClick={handleCheckout}
         className="px-5 py-3 text-white bg-[#06202A] rounded-lg w-[100%] hover:shadow-2xl"
       >
-        <span className="font-medium">Purchase {transformToUSMoney(totalPrice)}</span>
+        <span className="font-medium">
+          Purchase {transformToUSMoney(totalPrice)}
+        </span>
       </button>
     </>
   );

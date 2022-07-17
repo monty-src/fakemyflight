@@ -11,15 +11,15 @@ import Results from '../components/Results';
 import OneWay from '../components/Oneway';
 import RoundTrip from '../components/RoundTrip';
 
-import {transformToUSMoney} from '../utils/transform-price';
+import { transformToUSMoney } from '../utils/transform-price';
 
 const Home = () => {
   const [flights, setFlights] = useState(false);
   const [radio, setRadio] = useState(0);
-  const [ totalPrice, setTotalPrice ] = useState(5);
-  const [ prices, setPrices ] = useState({
+  const [totalPrice, setTotalPrice] = useState(5);
+  const [prices, setPrices] = useState({
     children: 0,
-    adults: 5
+    adults: 5,
   });
 
   const checkoutValuesInputs = { firstName: '', lastName: '' };
@@ -52,33 +52,27 @@ const Home = () => {
 
   const addFormFields = (person) => {
     if (person === 'adult') {
-      const adults = [
-        ...formAdultsCheckoutValues,
-        checkoutValuesInputs,
-      ];
+      const adults = [...formAdultsCheckoutValues, checkoutValuesInputs];
       if (adults.length === 6) return false;
       setAdultsFormCheckoutValues(adults);
-      const adultsPrice = (adults.length * 5);
+      const adultsPrice = adults.length * 5;
       setPrices({
         ...prices,
-        adults: adultsPrice
+        adults: adultsPrice,
       });
       setTotalPrice(prices.children + adultsPrice);
       return false;
     }
-    const children = [
-      ...formChildrenCheckoutValues,
-      checkoutValuesInputs,
-    ];
+    const children = [...formChildrenCheckoutValues, checkoutValuesInputs];
     if (children.length === 6) return false;
     setChildrenFormCheckoutValues([
       ...formChildrenCheckoutValues,
       checkoutValuesInputs,
     ]);
-    const childrenPrice = (children.length * 2.5);
+    const childrenPrice = children.length * 2.5;
     setPrices({
       ...prices,
-      children: childrenPrice
+      children: childrenPrice,
     });
     setTotalPrice(childrenPrice + prices.adults);
   };
@@ -89,10 +83,10 @@ const Home = () => {
       const newFormValues = [...formAdultsCheckoutValues];
       newFormValues.splice(i, 1);
       setAdultsFormCheckoutValues(newFormValues);
-      const adultsPrice = (newFormValues.length * 5);
+      const adultsPrice = newFormValues.length * 5;
       setPrices({
         ...prices,
-        adults: adultsPrice
+        adults: adultsPrice,
       });
       setTotalPrice(prices.children + adultsPrice);
       return false;
@@ -100,10 +94,10 @@ const Home = () => {
     const newFormValues = [...formChildrenCheckoutValues];
     newFormValues.splice(i, 1);
     setChildrenFormCheckoutValues(newFormValues);
-    const childrenPrice = (newFormValues.length * 2.5);
+    const childrenPrice = newFormValues.length * 2.5;
     setPrices({
       ...prices,
-      children: childrenPrice
+      children: childrenPrice,
     });
     setTotalPrice(childrenPrice + prices.adults);
   };
@@ -148,6 +142,8 @@ const Home = () => {
               handleFormCheckoutValues={handleFormCheckoutValues}
               formAdultsCheckoutValues={formAdultsCheckoutValues}
               formChildrenCheckoutValues={formChildrenCheckoutValues}
+              setAdultsFormCheckoutValues={setAdultsFormCheckoutValues}
+              setChildrenFormCheckoutValues={setChildrenFormCheckoutValues}
             />
           )}
           {flights && roundTrip && (
