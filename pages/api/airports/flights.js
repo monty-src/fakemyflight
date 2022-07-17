@@ -2,6 +2,7 @@ import axios from 'axios';
 import JsonQuery from 'json-query';
 
 import truncateLegs from '../../../utils/truncate-legs';
+import transformPrice from '../../../utils/transform-price';
 import { validateFlightRequest } from '../../../utils/schema';
 import {
   transformFlightRequest,
@@ -61,7 +62,9 @@ export default async function (req, res) {
       data: { fares },
     });
 
-    fare = fare.price;
+    console.log("trasnform price %s", transformPrice(fare.price));
+
+    fare = transformPrice(fare.price);
 
     return oneWay ? { leg, fare } : { leg, second_leg, fare };
   });
@@ -71,5 +74,4 @@ export default async function (req, res) {
     : sortByRoundTripDuration(responseContainer);
 
   res.status(200).json(response);
-  
 }

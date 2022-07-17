@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import moment from 'moment';
 import { ArrowRightIcon } from '@heroicons/react/outline';
-import { dateTime, timeConvert } from '../utils/datetime-utils';
+import { timeConvert } from '../utils/datetime-utils';
 
 import Checkout from './Checkout';
 
@@ -33,7 +33,7 @@ export const OneWay = ({
               </ul>
               <div className="text-right col-start-3 col-end-5">
                 <p className="font-bold text-4xl lg:text-2xl line-through">
-                  ${fare.amount}.00
+                  {fare.amount}
                 </p>
                 <p className="text-xl">$5.00</p>
               </div>
