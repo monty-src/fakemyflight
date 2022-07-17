@@ -8,6 +8,7 @@ export const OneWay = ({
   email,
   payment,
   setEmail,
+  totalPrice,
   toggleHide,
   addFormFields,
   handleCheckout,
@@ -103,6 +104,7 @@ export const OneWay = ({
               <Checkout
                 email={email}
                 setEmail={setEmail}
+                totalPrice={totalPrice}
                 handleCheckout={handleCheckout}
                 addFormFields={addFormFields}
                 removeFormFields={removeFormFields}

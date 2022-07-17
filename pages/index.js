@@ -11,9 +11,16 @@ import Results from '../components/Results';
 import OneWay from '../components/Oneway';
 import RoundTrip from '../components/RoundTrip';
 
-const official = () => {
+import {transformToUSMoney} from '../utils/transform-price';
+
+const Home = () => {
   const [flights, setFlights] = useState(false);
   const [radio, setRadio] = useState(0);
+  const [ totalPrice, setTotalPrice ] = useState(5);
+  const [ prices, setPrices ] = useState({
+    children: 0,
+    adults: 5
+  });
 
   const checkoutValuesInputs = { firstName: '', lastName: '' };
   const [email, setEmail] = useState('');
@@ -51,6 +58,12 @@ const official = () => {
       ];
       if (adults.length === 6) return false;
       setAdultsFormCheckoutValues(adults);
+      const adultsPrice = (adults.length * 5);
+      setPrices({
+        ...prices,
+        adults: adultsPrice
+      });
+      setTotalPrice(prices.children + adultsPrice);
       return false;
     }
     const children = [
@@ -62,6 +75,12 @@ const official = () => {
       ...formChildrenCheckoutValues,
       checkoutValuesInputs,
     ]);
+    const childrenPrice = (children.length * 2.5);
+    setPrices({
+      ...prices,
+      children: childrenPrice
+    });
+    setTotalPrice(childrenPrice + prices.adults);
   };
 
   const removeFormFields = (i, person) => {
@@ -70,11 +89,23 @@ const official = () => {
       const newFormValues = [...formAdultsCheckoutValues];
       newFormValues.splice(i, 1);
       setAdultsFormCheckoutValues(newFormValues);
+      const adultsPrice = (newFormValues.length * 5);
+      setPrices({
+        ...prices,
+        adults: adultsPrice
+      });
+      setTotalPrice(prices.children + adultsPrice);
       return false;
     }
     const newFormValues = [...formChildrenCheckoutValues];
     newFormValues.splice(i, 1);
     setChildrenFormCheckoutValues(newFormValues);
+    const childrenPrice = (newFormValues.length * 2.5);
+    setPrices({
+      ...prices,
+      children: childrenPrice
+    });
+    setTotalPrice(childrenPrice + prices.adults);
   };
 
   const oneWay = radio === 0;
@@ -108,6 +139,7 @@ const official = () => {
               data={flights}
               payment={payment}
               email={email}
+              totalPrice={totalPrice}
               toggleHide={toggleHide}
               setEmail={setEmail}
               addFormFields={addFormFields}
@@ -139,4 +171,4 @@ const official = () => {
   );
 };
 
-export default official;
+export default Home;
