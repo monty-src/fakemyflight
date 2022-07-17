@@ -6,12 +6,9 @@ import Header from '../components/Header';
 import MainForm from '../components/MainForm';
 import Masthead from '../components/Masthead';
 
-import Results from '../components/Results';
-
 import OneWay from '../components/Oneway';
+import Results from '../components/Results';
 import RoundTrip from '../components/RoundTrip';
-
-import { transformToUSMoney } from '../utils/transform-price';
 
 const Home = () => {
   const [flights, setFlights] = useState(false);
