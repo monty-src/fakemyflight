@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import { ArrowRightIcon } from '@heroicons/react/outline';
 
 import Checkout from './Checkout';
@@ -71,24 +70,16 @@ export const OneWay = ({
           </section>
           <section className="flex justify-evenly items-center text-center sm:text-3xl text-white">
             <div className="text-xl">
-              <p>
-                {moment(new Date(leg.departureDateTime).toDateString()).format(
-                  'MMM Do'
-                )}
-              </p>
-              <p>{moment(leg.departureDateTime).format('h:mm a')}</p>
+              <p>{leg.departureDate}</p>
+              <p>{leg.departureTime}</p>
               <p className="text-6xl">{leg.departureAirportCode}</p>
             </div>
             <div>
               <ArrowRightIcon className="h-16 sm:h-20" />
             </div>
             <div className="text-xl">
-              <p>
-                {moment(new Date(leg.arrivalDateTime).toDateString()).format(
-                  'MMM Do'
-                )}
-              </p>
-              <p>{moment(leg.arrivalDateTime).format('h:mm a')}</p>
+              <p>{leg.arrivalDate}</p>
+              <p>{leg.arrivalTime}</p>
               <p className="text-6xl">{leg.arrivalAirportCode}</p>
             </div>
           </section>
