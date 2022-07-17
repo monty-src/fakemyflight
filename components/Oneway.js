@@ -43,24 +43,28 @@ export const OneWay = ({
                     <p className="font-bold mt-5">{segment.designatorCode}</p>
                     <p className="font-bold">
                       Duration:{' '}
-                      <span className="font-normal">
-                        {timeConvert(segment.durationMinutes)}
-                      </span>
+                      <span className="font-normal">{segment.duration}</span>
                     </p>
-                    <p className="font-bold">
+                    <p className="font-bold mt-2">
                       Departure:{' '}
                       <span className="font-normal">
-                        {segment.departureAirportCode} -{' '}
-                        {segment.departureAirport}
+                        {segment.departureAirportCode}
                       </span>
                     </p>
-                    <p className="font-bold">
+                    <p>{segment.departureAirport}</p>
+                    <p className="font-bold mt-2">
                       Arrival:{' '}
                       <span className="font-normal">
-                        {segment.arrivalAirportCode} -{' '}
-                        {segment.arrivalAirport}
+                        {segment.arrivalAirportCode}
                       </span>
                     </p>
+                    <p>{segment.arrivalAirport}</p>
+                    {segment.stopoverDurationMinutes !== 0 && (
+                      <p className="mt-5 mb-2 font-bold">
+                        Layover Time:{' '}
+                        <span className="font-normal">{segment.stopOver}</span>
+                      </p>
+                    )}
                   </div>
                 ))}
               </div>

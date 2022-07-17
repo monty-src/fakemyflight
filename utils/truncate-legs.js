@@ -11,6 +11,8 @@ export default (leg, airlines, airports) => {
     id,
     duration,
     segments,
+    arrivalAirportCode,
+    departureAirportCode,
     durationMinutes,
     arrivalDateTime,
     stopoversCount,
@@ -20,6 +22,9 @@ export default (leg, airlines, airports) => {
   } = leg;
   return {
     id,
+
+    arrivalAirportCode,
+    departureAirportCode,
 
     stopoversCount,
     stopoverDuration,
