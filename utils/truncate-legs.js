@@ -1,12 +1,10 @@
 import {
   verboseAirline,
-  verboseDurationMinutes,
-  verboseStopOverMinutes,
   verboseDeparetureAirportCode,
   verboseArrivalAirportCode,
 } from './mutate';
 
-import { extractTime, extractDate } from './datetime-utils';
+import { timeConvert, toHoursAndMinutes, extractTime, extractDate } from './datetime-utils';
 
 export default (leg, airlines, airports) => {
   const {
@@ -51,10 +49,10 @@ export default (leg, airlines, airports) => {
       }) => ({
         designatorCode,
 
-        duration: verboseDurationMinutes(durationMinutes),
+        duration: timeConvert(durationMinutes),
         durationMinutes,
 
-        stopOver: verboseStopOverMinutes(stopoverDurationMinutes),
+        stopOver: timeConvert(stopoverDurationMinutes),
         stopoverDurationMinutes,
 
         airlineCode,

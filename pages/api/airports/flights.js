@@ -62,8 +62,6 @@ export default async function (req, res) {
       data: { fares },
     });
 
-    console.log("trasnform price %s", transformPrice(fare.price));
-
     fare = transformPrice(fare.price);
 
     return oneWay ? { leg, fare } : { leg, second_leg, fare };

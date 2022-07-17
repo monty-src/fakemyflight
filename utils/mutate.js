@@ -1,19 +1,11 @@
 import moment from 'moment';
 import JsonQuery from 'json-query';
-
-import { toHoursAndMinutes } from './datetime-utils';
 import { DATE_FORMAT, extractAiport } from './schema';
 
 export const verboseAirline = (airlineCode, airlines) =>
   JsonQuery(`airlines[code=${airlineCode}]`, {
     data: { airlines },
   }).value.name;
-
-export const verboseDurationMinutes = (durationMinutes) =>
-  toHoursAndMinutes(durationMinutes);
-
-export const verboseStopOverMinutes = (stopoverDurationMinutes) =>
-  toHoursAndMinutes(stopoverDurationMinutes);
 
 export const verboseDeparetureAirportCode = (departureAirportCode, airports) =>
   JsonQuery(`airports[code=${departureAirportCode}]`, { data: { airports } })

@@ -6,8 +6,8 @@ export const timeConvert = (n) => {
   var rhours = Math.floor(hours);
   var minutes = (hours - rhours) * 60;
   var rminutes = Math.round(minutes);
-  if (rhours === 0) return rminutes + ' min';
-  return rhours + ' hr  ' + rminutes + ' min';
+  if (rhours === 0) return `${rminutes}m`;
+  return `${rhours}h ${rminutes}m`;
 };
 
 export const extractDate = (date) =>

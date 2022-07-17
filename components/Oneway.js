@@ -25,9 +25,9 @@ export const OneWay = ({
           <section className="p-5 bg-[#F4EBD0] text-zinc-700 border-dashed border-4 border-black rounded-lg">
             <div className="grid grid-cols-4">
               <ul className="col-start-1 col-end-3">
-                {leg.segments.map(({ verboseAirline }, index) => (
+                {leg.segments.map(({ designatorCode }, index) => (
                   <li className="font-bold text-base" key={index}>
-                    {verboseAirline}
+                    {designatorCode}
                   </li>
                 ))}
               </ul>
@@ -40,8 +40,8 @@ export const OneWay = ({
               <div className="col-span-4">
                 {leg.segments.map((segment, index) => (
                   <div key={index}>
-                    <p className="font-bold mt-8">{segment.designatorCode}</p>
-                    <p className="font-bold mb-5">
+                    <p className="font-bold mt-5">{segment.designatorCode}</p>
+                    <p className="font-bold">
                       Duration:{' '}
                       <span className="font-normal">
                         {timeConvert(segment.durationMinutes)}
@@ -51,14 +51,14 @@ export const OneWay = ({
                       Departure:{' '}
                       <span className="font-normal">
                         {segment.departureAirportCode} -{' '}
-                        {segment.verboseDepartureAirportCode}
+                        {segment.departureAirport}
                       </span>
                     </p>
                     <p className="font-bold">
                       Arrival:{' '}
                       <span className="font-normal">
                         {segment.arrivalAirportCode} -{' '}
-                        {segment.verboseArrivalAirportCode}
+                        {segment.arrivalAirport}
                       </span>
                     </p>
                   </div>
