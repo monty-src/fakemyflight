@@ -34,3 +34,18 @@ export const validateFlightRequest = (data) => {
     toAirport,
   });
 };
+
+export const validatePurchase = (data) => {
+  const {email, adults, children} = data;
+  console.log('data: ', data);
+
+  const schema = Joi.object({
+    email: Joi.string.email()
+  });
+  
+  return schema.validate({
+    email,
+    adults,
+    children
+  });
+};

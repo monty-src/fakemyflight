@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 import Head from 'next/head';
 
@@ -29,10 +30,14 @@ const Home = () => {
     checkoutValuesInputs,
   ]);
 
-  const handleCheckout = () => {
-    console.log('email: ', email);
-    console.log('adults inputs: ', formAdultsCheckoutValues);
-    console.log('children inputs: ', formChildrenCheckoutValues);
+  const handleCheckout = async () => {
+    const response = await axios.post('http://localhost:3000/api/purchase', {
+      email,
+      adults: formAdultsCheckoutValues,
+      children: formChildrenCheckoutValues
+    });
+    console.log('response data: ', response.data.url);
+    window.location.href = response.data.url
   };
 
   const handleFormCheckoutValues = (i, label, e) => {
