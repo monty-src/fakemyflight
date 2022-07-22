@@ -1,11 +1,16 @@
+
+import Stripe from 'stripe';
+import { validatePurchase } from '../../utils/schema';
+import { adultPrice, childPrice } from '../../utils/products';
+
 const { STRIPE_API_KEY } = process.env;
 
-const stripe = require('stripe')(STRIPE_API_KEY);
-
-import { adultPrice, childPrice } from '../../utils/products';
-import { validatePurchase } from '../../utils/schema';
-
 export default async function (req, res) {
+  
+  const stripe = new Stripe(STRIPE_API_KEY, {
+    apiVersion: '2020-08-27',
+  });
+
   const { value: requestBody, error: requestSchemaError } = validatePurchase(
     req.body
   );
